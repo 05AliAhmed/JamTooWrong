@@ -4,28 +4,59 @@ public class HealthBarSystem : MonoBehaviour
 {
     public GameObject firstHealth;
     public GameObject secondHealth;
-    public GameObject thirdHealth;  
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject thirdHealth;
+
+    private HealthBar firstScript;
+    private HealthBar secondScript;
+    private HealthBar thirdScript;
+
     void Start()
     {
-        
+        firstScript = firstHealth.GetComponent<HealthBar>();
+        secondScript = secondHealth.GetComponent<HealthBar>();
+        thirdScript = thirdHealth.GetComponent<HealthBar>();
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        OnMouseDown();
-    }
-    void OnClick()
-    {
-
-    }
-    void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Object clicked");
+            LoseHealth();
         }
-       
+        if (Input.GetMouseButtonDown(1))
+        {
+            AddHealth();
+        }
+    }
+
+    void LoseHealth()
+    {
+        if (!firstScript.healthEmpty)
+        {
+            firstScript.HealthLost();
+        }
+        else if (!secondScript.healthEmpty)
+        {
+            secondScript.HealthLost();
+        }
+        else if (!thirdScript.healthEmpty)
+        {
+            thirdScript.HealthLost();
+        }
+    }
+    void AddHealth()
+    {
+        if (thirdScript.healthEmpty==true)
+        {
+            thirdScript.AddHealth();
+        }
+        else if (secondScript.healthEmpty==true)
+        {
+            secondScript.AddHealth();
+        }
+        else if (firstScript.healthEmpty==true)
+        {
+            firstScript.AddHealth();
+        }
     }
 }
