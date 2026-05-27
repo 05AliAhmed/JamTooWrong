@@ -10,6 +10,8 @@ public class HealthBarSystem : MonoBehaviour
     private HealthBar secondScript;
     private HealthBar thirdScript;
 
+   bool dead;
+
     void Start()
     {
         firstScript = firstHealth.GetComponent<HealthBar>();
@@ -26,6 +28,13 @@ public class HealthBarSystem : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             AddHealth();
+        }
+
+        if (!dead &&firstScript.healthEmpty && secondScript.healthEmpty && thirdScript.healthEmpty == true)
+        {
+            dead = true;
+            Debug.Log("The player has died");
+
         }
     }
 
