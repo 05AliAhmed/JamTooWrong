@@ -13,6 +13,10 @@ public class BallBehaviour : MonoBehaviour
     public PlayerBehaviour FirstPlayer; //the variable for accessing player 1
     public PlayerBehaviour SecondPlayer; //and this is for player 2
 
+    public GameObject HealthBarSystem;
+    public HealthBarSystem HBS;
+
+   // public bool isInside;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,9 +24,14 @@ public class BallBehaviour : MonoBehaviour
     }
 
     //this function checks if the ball is in the parry zone
-    private void OnTriggerEnter2D(Collider2D collision)
+     void OnTriggerEnter2D(Collider2D collisioninfo)
     {
-        //Debug.Log("Inside");
+        if (collisioninfo.tag == "Player")
+        {
+            Debug.Log("Inside");
+            
+
+        }
 
         if (playerTurn == 1)
         {
@@ -35,6 +44,36 @@ public class BallBehaviour : MonoBehaviour
             SecondPlayer.parryPermission = true;
             FirstPlayer.parryPermission = false;
         }
+
+        /*if (playerTurn == 1)
+        {
+            FirstPlayer.parryPermission = true;
+            SecondPlayer.parryPermission = false;
+        }
+
+        if (playerTurn == 2)
+        {
+            SecondPlayer.parryPermission = true;
+            FirstPlayer.parryPermission = false;
+        }*/
+        if (collisioninfo.tag == "Heart")
+        {
+            if (playerTurn == 1)
+            {
+                Debug.Log("Player 1 got hit");
+                HBS.P1LoseHealth();
+                //FirstPlayer.isHit = true;
+                playerTurn =2;
+            }
+
+            else if (playerTurn == 2)
+            {
+                Debug.Log("Player 2 got hit");
+                HBS.P2LoseHealth(); 
+                //SecondPlayer.isHit = true;
+                playerTurn = 1;
+            }
+        }
     }
 
     //this code tells the game that the ball left the parry zone
@@ -43,6 +82,8 @@ public class BallBehaviour : MonoBehaviour
         //this simply means both players aren't able to parry as soon as the ball leaves the parry zone
         SecondPlayer.parryPermission = false;
         FirstPlayer.parryPermission = false;
+        SecondPlayer.isHit = false;
+        FirstPlayer.isHit = false;
     }
     // Update is called once per frame
     void Update()
@@ -68,30 +109,91 @@ public class BallBehaviour : MonoBehaviour
         }
 
         //if you press this button, you will attempt to parry
-        if (Input.GetMouseButtonDown(0)) //feel free to replace input with whatever you want
+        /*if (Input.GetMouseButtonDown(2)) //feel free to replace input with whatever you want
+         {
+             //if player one can parry, move the ball towards player two, and increase it's speed.
+             if (FirstPlayer.parryPermission == true)
+             {
+                 playerTurn++;
+                 if (BallSpeed < BallSpeedLimit) 
+                 { 
+                     BallSpeed++;
+                 }
+             }
+
+             //if player two can parry, move the ball towards player one, and increase it's speed.
+             if (SecondPlayer.parryPermission == true)
+             {
+                 playerTurn++;
+                 if (BallSpeed < BallSpeedLimit)
+                 {
+                     BallSpeed++;
+                 }
+             }
+             if (FirstPlayer.parryPermission==false )
+             {
+                 playerTurn++;
+                 Debug.Log("Misclick");
+             }
+             if (SecondPlayer.parryPermission==false)
+             {
+                 playerTurn++;
+                 Debug.Log("Misclick");
+             }
+         }
+        */
+        if (Input.GetMouseButtonDown(0))
         {
-            //if player one can parry, move the ball towards player two, and increase it's speed.
-            if (FirstPlayer.parryPermission != false)
+            // Player 1 turn
+            if (playerTurn == 1)
             {
-                playerTurn++;
-                if (BallSpeed < BallSpeedLimit) 
-                { 
-                    BallSpeed++;
-                }
-            }
-
-            //if player two can parry, move the ball towards player one, and increase it's speed.
-            if (SecondPlayer.parryPermission != false)
-            {
-                playerTurn++;
-                if (BallSpeed < BallSpeedLimit)
+                if (FirstPlayer.parryPermission)
                 {
-                    BallSpeed++;
+                    playerTurn = 2;
+
+                    if (BallSpeed < BallSpeedLimit)
+                    {
+                        BallSpeed++;
+                    }
+                    else if (BallSpeed >= BallSpeedLimit)
+                    {
+                        BallSpeed=25f;
+                    }
+
+                    Debug.Log("Player 1 Parried");
+                }
+                else
+                {
+                    //playerTurn = 2;
+                    Debug.Log("Player 1 Missed");
                 }
             }
 
-        }
+            // Player 2 turn
+            else if (playerTurn == 2)
+            {
+                if (SecondPlayer.parryPermission)
+                {
+                    playerTurn = 1;
 
+                    if (BallSpeed < BallSpeedLimit)
+                    {
+                        BallSpeed++;
+                    }
+                    else if (BallSpeed >= BallSpeedLimit)
+                    {
+                        BallSpeed = 25f;
+                    }
+
+                    Debug.Log("Player 2 Parried");
+                }
+                else
+                {
+                    //playerTurn = 1;
+                    Debug.Log("Player 2 Missed");
+                }
+            }
+        }
         //this code makes sure player turns are cycled between player 1 and 2 by setting playerTurn back to 1 every time its more than 2,
         //creating a loop that makes switching player turns as easy as "playerTurn++;".
         if (playerTurn > 2)
