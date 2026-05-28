@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Health
   - Heart
+  - Parry
   layers:
   - Default
   - TransparentFX

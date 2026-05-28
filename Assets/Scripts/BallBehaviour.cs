@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class BallBehaviour : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class BallBehaviour : MonoBehaviour
     public GameObject parryText;
     public GameObject missedText;
 
+    public Animator animSpeed;
    
     //public GameObject parryText;
    // public bool isInside;
@@ -39,7 +41,7 @@ public class BallBehaviour : MonoBehaviour
     //this function checks if the ball is in the parry zone
      void OnTriggerEnter2D(Collider2D collisioninfo)
     {
-        if (collisioninfo.tag == "Player")
+        if (collisioninfo.tag == "Parry")
         {
             Debug.Log("Inside");
             
@@ -79,6 +81,7 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 2;
 
                     BallSpeed = 5f;
+                    animSpeed.speed = 1f;
                     FirstPlayer.playerHealth -= 2;
                     //CheckHealth();
                 }
@@ -90,7 +93,9 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 2;
 
                     BallSpeed = 5f;
+                    animSpeed.speed = 1f;
                     FirstPlayer.playerHealth -= 1;
+
                     //CheckHealth();
                 }
             }
@@ -103,6 +108,7 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 1;
 
                     BallSpeed = 5f;
+                    animSpeed.speed = 1f;
                     SecondPlayer.playerHealth -= 2;
                    // CheckHealth();
                 }
@@ -114,6 +120,7 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 1;
 
                     BallSpeed = 5f;
+                    animSpeed.speed = 1f;
                     SecondPlayer.playerHealth -= 1;
                     //CheckHealth();
                 }
@@ -158,6 +165,11 @@ public class BallBehaviour : MonoBehaviour
                 PlayerOne.position,
                 BallSpeed * Time.deltaTime
                 );
+
+            Vector3 direction = PlayerOne.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
         }
 
         //if it's player 2's turn to play, the ball will move towards player 2
@@ -168,6 +180,11 @@ public class BallBehaviour : MonoBehaviour
                 PlayerTwo.position,
                 BallSpeed * Time.deltaTime
                 );
+
+            Vector3 direction = PlayerTwo.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
         }
 
         //if you press this button, you will attempt to parry
@@ -229,6 +246,7 @@ public class BallBehaviour : MonoBehaviour
                     if (BallSpeed < BallSpeedLimit)
                     {
                         BallSpeed++;
+                        animSpeed.speed++;
                     }
                     else if (BallSpeed >= BallSpeedLimit)
                     {
@@ -270,6 +288,8 @@ public class BallBehaviour : MonoBehaviour
                     if (BallSpeed < BallSpeedLimit)
                     {
                         BallSpeed++;
+                       
+                        animSpeed.speed++;
                     }
                     else if (BallSpeed >= BallSpeedLimit)
                     {
