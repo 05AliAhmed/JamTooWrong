@@ -79,6 +79,8 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 2;
 
                     BallSpeed = 5f;
+                    FirstPlayer.playerHealth -= 2;
+                    //CheckHealth();
                 }
                 else
                 {
@@ -88,6 +90,8 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 2;
 
                     BallSpeed = 5f;
+                    FirstPlayer.playerHealth -= 1;
+                    //CheckHealth();
                 }
             }
 
@@ -99,6 +103,8 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 1;
 
                     BallSpeed = 5f;
+                    SecondPlayer.playerHealth -= 2;
+                   // CheckHealth();
                 }
                 else
                 {
@@ -108,6 +114,8 @@ public class BallBehaviour : MonoBehaviour
                     playerTurn = 1;
 
                     BallSpeed = 5f;
+                    SecondPlayer.playerHealth -= 1;
+                    //CheckHealth();
                 }
 
             }
@@ -126,6 +134,19 @@ public class BallBehaviour : MonoBehaviour
         
 
     }
+    /*public void CheckHealth()
+    {
+        if (FirstPlayer.playerHealth <=0)
+        {
+            FirstPlayer.isDead = true;
+        }
+        if(SecondPlayer.playerHealth <= 0)
+        {
+            SecondPlayer.isDead = true;
+        }
+
+
+    }*/
     // Update is called once per frame
     void Update()
     {

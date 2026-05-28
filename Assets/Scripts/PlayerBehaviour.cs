@@ -9,33 +9,36 @@ public class PlayerBehaviour : MonoBehaviour
     //public float PlayerSpeed = 7f;
     public bool parryPermission; //used by the ball to decide which player can parry
     public bool playerTurn;
-
+   //public int playerHealth = 3;
+    public bool isDead;
     public bool DDMGeffect;
-   
- 
-   
+    public int MaxHealth = 3;
+    public int playerHealth;
+
 
     //public BallBehaviour ball;
-   // public GameObject missedText;
-   
+    // public GameObject missedText;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isDead = false;
         DDMGeffect = false;
-    }
+         playerHealth = MaxHealth;
+}
 
     // Update is called once per frame
     void Update()
     {
-        
-        //everything below issthe player movement code. replace this, if you want to.
-        /*float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-
-        Vector2 movement = new Vector2(moveX, moveY).normalized;
-
-        transform.position += (Vector3)(movement * PlayerSpeed * Time.deltaTime);*/
+       
+        if (!isDead&&playerHealth<=0)
+            
+        {
+            isDead = true;
+            Debug.Log("Game Over");
+            //SceneManager.LoadScene(0);
+        }
     }
 
 
