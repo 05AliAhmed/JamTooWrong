@@ -22,6 +22,7 @@ public class BallBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+     
         playerTurn = 1; //this means the ball will approach player 1 at the beginning of the game
         isInput = true;
     }
@@ -90,6 +91,8 @@ public class BallBehaviour : MonoBehaviour
         SecondPlayer.isHit = false;
         FirstPlayer.isHit = false;
         isInput = true;
+
+        
 
     }
     // Update is called once per frame
@@ -175,6 +178,7 @@ public class BallBehaviour : MonoBehaviour
                     //playerTurn = 2;
                     Debug.Log("Player 1 Missed");
                     isInput =false;
+                    FirstPlayer.printText();
                 }
             }
 
@@ -202,6 +206,7 @@ public class BallBehaviour : MonoBehaviour
                     //playerTurn = 1;
                     Debug.Log("Player 2 Missed");
                     isInput = false;
+                    SecondPlayer.printText();
                 }
             }
         }
