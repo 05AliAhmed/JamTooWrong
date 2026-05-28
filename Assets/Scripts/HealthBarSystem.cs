@@ -100,11 +100,18 @@ public class HealthBarSystem : MonoBehaviour
             P2thirdScript.HealthLost();
         }
     }
-    public void DoubleLoseHealth()
+    public void P1DoubleLoseHealth()
     {
         for (int i = 0; i < 2; i++)
         {
             P1LoseHealth();
+        }
+    }
+    public void P2DoubleLoseHealth()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            P2LoseHealth();
         }
     }
 

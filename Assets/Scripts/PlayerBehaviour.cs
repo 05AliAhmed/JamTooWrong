@@ -9,6 +9,8 @@ public class PlayerBehaviour : MonoBehaviour
     //public float PlayerSpeed = 7f;
     public bool parryPermission; //used by the ball to decide which player can parry
     public bool playerTurn;
+
+    public bool DDMGeffect;
    
  
    
@@ -20,7 +22,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        DDMGeffect = false;
     }
 
     // Update is called once per frame

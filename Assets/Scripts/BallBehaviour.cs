@@ -17,9 +17,13 @@ public class BallBehaviour : MonoBehaviour
     public HealthBarSystem HBS;
 
     public bool isInput;// diable whether the player can click the mouse again or not
+    public bool P1ballonDDMG;// use to call when the ball is on double dmg or not
+    public bool P2ballonDDMG;
 
     public GameObject parryText;
     public GameObject missedText;
+
+   
     //public GameObject parryText;
    // public bool isInside;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +32,8 @@ public class BallBehaviour : MonoBehaviour
      
         playerTurn = 1; //this means the ball will approach player 1 at the beginning of the game
         isInput = true;
+        P1ballonDDMG = false;
+        P2ballonDDMG = false;
     }
 
     //this function checks if the ball is in the parry zone
@@ -67,22 +73,43 @@ public class BallBehaviour : MonoBehaviour
         {
             if (playerTurn == 1)
             {
-                Debug.Log("Player 1 got hit");
-                HBS.P1LoseHealth();
-                //FirstPlayer.isHit = true;
-                playerTurn =2;
-                
-                BallSpeed = 5f;
+                if (P2ballonDDMG)
+                {
+                    HBS.P1DoubleLoseHealth();
+                    playerTurn = 2;
+
+                    BallSpeed = 5f;
+                }
+                else
+                {
+                    Debug.Log("Player 1 got hit");
+                    HBS.P1LoseHealth();
+                    //FirstPlayer.isHit = true;
+                    playerTurn = 2;
+
+                    BallSpeed = 5f;
+                }
             }
 
             else if (playerTurn == 2)
             {
-                Debug.Log("Player 2 got hit");
-                HBS.P2LoseHealth(); 
-                //SecondPlayer.isHit = true;
-                playerTurn = 1;
-                
-                BallSpeed = 5f;
+                if (P1ballonDDMG)
+                {
+                    HBS.P2DoubleLoseHealth();
+                    playerTurn = 1;
+
+                    BallSpeed = 5f;
+                }
+                else
+                {
+                    Debug.Log("Player 2 got hit");
+                    HBS.P2LoseHealth();
+                    //SecondPlayer.isHit = true;
+                    playerTurn = 1;
+
+                    BallSpeed = 5f;
+                }
+
             }
         }
     }
@@ -165,6 +192,18 @@ public class BallBehaviour : MonoBehaviour
                 {
                     playerTurn = 2;
                     transform.position += (PlayerTwo.position - transform.position).normalized * 0.5f;
+                    if (FirstPlayer.DDMGeffect == true)
+                    {
+                        P1ballonDDMG = true;
+                        FirstPlayer.DDMGeffect = false;
+                    }
+
+                    if (P2ballonDDMG)
+                    {
+                        P2ballonDDMG= false;
+                    }
+
+
 
                     if (BallSpeed < BallSpeedLimit)
                     {
@@ -183,7 +222,9 @@ public class BallBehaviour : MonoBehaviour
                     //playerTurn = 2;
                     Debug.Log("Player 1 Missed");
                     isInput =false;
+                    FirstPlayer.DDMGeffect=false;
                     FirstPlayer.PrintingTextTR(missedText);
+                
                 }
             }
 
@@ -192,8 +233,18 @@ public class BallBehaviour : MonoBehaviour
             {
                 if (SecondPlayer.parryPermission)
                 {
+                 
                     playerTurn = 1;
                     transform.position += (PlayerOne.position - transform.position).normalized * 0.5f;
+                    if (SecondPlayer.DDMGeffect == true)
+                    {
+                        P2ballonDDMG = true;
+                        SecondPlayer.DDMGeffect = false;
+                    }
+                    if (P1ballonDDMG)
+                    {
+                        P1ballonDDMG= false;
+                    }
 
                     if (BallSpeed < BallSpeedLimit)
                     {
@@ -212,6 +263,7 @@ public class BallBehaviour : MonoBehaviour
                     //playerTurn = 1;
                     Debug.Log("Player 2 Missed");
                     isInput = false;
+                    SecondPlayer.DDMGeffect=false;
                     SecondPlayer.PrintingTextTL(missedText);
                 }
             }
