@@ -3143,8 +3143,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3141470818298761142, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1815896280}
   m_SourcePrefab: {fileID: 100100000, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
+--- !u!1 &1815896278 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3141470818298761142, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
+  m_PrefabInstance: {fileID: 1815896277}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1815896279 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 665987754533009275, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
+  m_PrefabInstance: {fileID: 1815896277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815896278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dde12fc85596414cbc16fc5715f78ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallBehaviour
+--- !u!114 &1815896280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815896278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86c4f6dc6e38c0469d84482f86782f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpeedBonusManagement
+  ballBehaviourScript: {fileID: 1815896279}
 --- !u!1001 &1855592465
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class BallBehaviour : MonoBehaviour
 
     public float BallSpeed = 5f; //the base/original speed of the ball
     public float BallSpeedLimit = 15.0f; //the limit for the ball's speed
+    public float BonusBallSpeed = 20.0f; //the speed of the ball during a speed bonus power up
 
     public int playerTurn;
 
@@ -20,6 +21,7 @@ public class BallBehaviour : MonoBehaviour
     public bool isInput;// diable whether the player can click the mouse again or not
     public bool P1ballonDDMG;// use to call when the ball is on double dmg or not
     public bool P2ballonDDMG;
+    public bool speedBonusStatus; //used to tell the ball whether the speed bonus is active or not
 
     public GameObject parryText;
     public GameObject missedText;
@@ -169,11 +171,22 @@ public class BallBehaviour : MonoBehaviour
         //if it's player 1's turn to play, the ball will move towards player 1
         if (playerTurn == 1)
         {
-            transform.position = Vector2.MoveTowards(
+            if (speedBonusStatus != true)
+            {
+                transform.position = Vector2.MoveTowards(
                 transform.position,
                 PlayerOne.position,
                 BallSpeed * Time.deltaTime
                 );
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(
+                transform.position,
+                PlayerOne.position,
+                BonusBallSpeed * Time.deltaTime
+                );
+            }
 
             Vector3 direction = PlayerOne.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -184,11 +197,22 @@ public class BallBehaviour : MonoBehaviour
         //if it's player 2's turn to play, the ball will move towards player 2
         if (playerTurn == 2)
         {
-            transform.position = Vector2.MoveTowards(
+            if (speedBonusStatus != true)
+            {
+                transform.position = Vector2.MoveTowards(
                 transform.position,
                 PlayerTwo.position,
                 BallSpeed * Time.deltaTime
                 );
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(
+                transform.position,
+                PlayerTwo.position,
+                BonusBallSpeed * Time.deltaTime
+                );
+            }
 
             Vector3 direction = PlayerTwo.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -253,7 +277,10 @@ public class BallBehaviour : MonoBehaviour
 
                 if (BallSpeed < BallSpeedLimit)
                 {
-                    BallSpeed++;
+                    if (speedBonusStatus != true)
+                    {
+                        BallSpeed++;
+                    }
                     animSpeed.speed++;
                 }
                 else if (BallSpeed >= BallSpeedLimit)
@@ -295,8 +322,10 @@ public class BallBehaviour : MonoBehaviour
 
                 if (BallSpeed < BallSpeedLimit)
                 {
-                    BallSpeed++;
-
+                    if (speedBonusStatus != true)
+                    {
+                        BallSpeed++;
+                    }
                     animSpeed.speed++;
                 }
                 else if (BallSpeed >= BallSpeedLimit)
