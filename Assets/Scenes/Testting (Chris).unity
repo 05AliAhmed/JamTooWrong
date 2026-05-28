@@ -795,8 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   powerups: {fileID: 1325626919}
-  sr: {fileID: 0}
-  cooldown: 10
+  cooldown: 8
 --- !u!4 &2089649047
 Transform:
   m_ObjectHideFlags: 0

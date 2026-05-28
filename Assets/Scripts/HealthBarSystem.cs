@@ -55,11 +55,7 @@ public class HealthBarSystem : MonoBehaviour
             P2LoseHealth();
             secondPlayerS.isHit = false;
         }*/
-        if (Input.GetMouseButtonDown(1))
-      
-        {
-            AddHealth();
-        }
+       
 
         /*if (!dead &&firstScript.healthEmpty && secondScript.healthEmpty && thirdScript.healthEmpty == true)
         {

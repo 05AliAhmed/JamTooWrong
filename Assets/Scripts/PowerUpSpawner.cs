@@ -22,7 +22,7 @@ public class PowerUpSpawner : MonoBehaviour
         }
         else if(cooldown <= 0)
         {
-            cooldown = 10f;
+            cooldown = 8f;
             SpawnObject();
         }
         

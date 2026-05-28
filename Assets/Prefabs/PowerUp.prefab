@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2798157562681277814}
   - component: {fileID: 4038870695152712722}
   - component: {fileID: 1801313940777224216}
-  - component: {fileID: 1603224008956747290}
+  - component: {fileID: 8807682266270660685}
   m_Layer: 0
   m_Name: PowerUp
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,7 +156,7 @@ MonoBehaviour:
   groupOfPlayers: []
   sr: {fileID: 0}
   poweruphit: 0
---- !u!95 &1603224008956747290
+--- !u!95 &8807682266270660685
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
