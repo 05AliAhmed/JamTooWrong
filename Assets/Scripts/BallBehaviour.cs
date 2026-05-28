@@ -71,6 +71,10 @@ public class BallBehaviour : MonoBehaviour
             SecondPlayer.parryPermission = true;
             FirstPlayer.parryPermission = false;
         }*/
+
+
+
+        // hit codes
         if (collisioninfo.tag == "Heart")
         {
             if (playerTurn == 1)
@@ -82,7 +86,9 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
+                    FirstPlayer.HitAudio();
                     FirstPlayer.playerHealth -= 2;
+                    
                     //CheckHealth();
                 }
                 else
@@ -94,6 +100,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
+                    FirstPlayer.HitAudio();
                     FirstPlayer.playerHealth -= 1;
 
                     //CheckHealth();
@@ -109,6 +116,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
+                    SecondPlayer.HitAudio();
                     SecondPlayer.playerHealth -= 2;
                    // CheckHealth();
                 }
@@ -121,6 +129,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
+                    SecondPlayer.HitAudio();
                     SecondPlayer.playerHealth -= 1;
                     //CheckHealth();
                 }
