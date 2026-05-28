@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public SpriteRenderer playerSprite;
     //public float PlayerSpeed = 7f;
     public bool parryPermission; //used by the ball to decide which player can parry
     public bool playerTurn;

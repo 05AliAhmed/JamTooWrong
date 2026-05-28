@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -27,7 +28,9 @@ public class BallBehaviour : MonoBehaviour
     public GameObject missedText;
 
     public Animator animSpeed;
-   
+
+    public Animator player1animator;
+    public Animator player2animator;
     //public GameObject parryText;
    // public bool isInside;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -90,6 +93,7 @@ public class BallBehaviour : MonoBehaviour
                     animSpeed.speed = 1f;
                     FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 2;
+                    StartCoroutine(HitFlash(FirstPlayer.playerSprite));
                     
                     //CheckHealth();
                 }
@@ -104,7 +108,7 @@ public class BallBehaviour : MonoBehaviour
                     animSpeed.speed = 1f;
                     FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 1;
-
+                    StartCoroutine(HitFlash(FirstPlayer.playerSprite));
                     //CheckHealth();
                 }
             }
@@ -120,7 +124,8 @@ public class BallBehaviour : MonoBehaviour
                     animSpeed.speed = 1f;
                     SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 2;
-                   // CheckHealth();
+                    StartCoroutine(HitFlash(SecondPlayer.playerSprite));
+                    // CheckHealth();
                 }
                 else
                 {
@@ -133,6 +138,7 @@ public class BallBehaviour : MonoBehaviour
                     animSpeed.speed = 1f;
                     SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 1;
+                    StartCoroutine(HitFlash(SecondPlayer.playerSprite));
                     //CheckHealth();
                 }
 
@@ -220,43 +226,10 @@ public class BallBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
         }
 
-        //if you press this button, you will attempt to parry
-        /*if (Input.GetMouseButtonDown(2)) //feel free to replace input with whatever you want
-         {
-             //if player one can parry, move the ball towards player two, and increase it's speed.
-             if (FirstPlayer.parryPermission == true)
-             {
-                 playerTurn++;
-                 if (BallSpeed < BallSpeedLimit) 
-                 { 
-                     BallSpeed++;
-                 }
-             }
-
-             //if player two can parry, move the ball towards player one, and increase it's speed.
-             if (SecondPlayer.parryPermission == true)
-             {
-                 playerTurn++;
-                 if (BallSpeed < BallSpeedLimit)
-                 {
-                     BallSpeed++;
-                 }
-             }
-             if (FirstPlayer.parryPermission==false )
-             {
-                 playerTurn++;
-                 Debug.Log("Misclick");
-             }
-             if (SecondPlayer.parryPermission==false)
-             {
-                 playerTurn++;
-                 Debug.Log("Misclick");
-             }
-         }
-        */
+       
         if (Input.GetMouseButtonDown(0) && isInput == true && playerTurn == 1)
         {
-
+            player1animator.SetBool("isHitting", true);
 
             if (FirstPlayer.parryPermission)
             {
@@ -304,9 +277,15 @@ public class BallBehaviour : MonoBehaviour
             }
 
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            player1animator.SetBool("isHitting", false);
+        }
         // Player 2 turn
          if (Input.GetMouseButtonDown(1) && isInput == true && playerTurn == 2)
         {
+            player2animator.SetBool("isHitting", true);
             if (SecondPlayer.parryPermission)
             {
 
@@ -349,15 +328,23 @@ public class BallBehaviour : MonoBehaviour
                 SecondPlayer.PrintingTextTL(missedText);
             }
         }
-        
-        
-
-
-        //this code makes sure player turns are cycled between player 1 and 2 by setting playerTurn back to 1 every time its more than 2,
-        //creating a loop that makes switching player turns as easy as "playerTurn++;".
-        if (playerTurn > 2)
+        if (Input.GetMouseButtonUp(1))
         {
-            playerTurn = 1;
+            player2animator.SetBool("isHitting", false);
+        }
+
+    }
+    public IEnumerator HitFlash(SpriteRenderer sr)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            sr.enabled = false;
+
+            yield return new WaitForSeconds(0.1f);
+
+            sr.enabled = true;
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

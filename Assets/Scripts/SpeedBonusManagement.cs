@@ -6,16 +6,18 @@ public class SpeedBonusManagement : MonoBehaviour
     public BallBehaviour ballBehaviourScript; //used by the ball object to reference itself in the code
     private int coroutineStep; //used to stop the coroutine from overlapping itself; using numbers as states;
 
+    public bool isSpeedTrigger;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        isSpeedTrigger = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) //how to start/trigger the coroutine
+        /*if (isSpeedTrigger) //how to start/trigger the coroutine
         {
             ballBehaviourScript.speedBonusStatus = true;
             StartSpeedBonus();
@@ -27,6 +29,14 @@ public class SpeedBonusManagement : MonoBehaviour
             {
                 StartSpeedBonus(); //begin the coroutine.
             }
+        }*/
+        if (isSpeedTrigger)
+        {
+            isSpeedTrigger = false;
+
+            ballBehaviourScript.speedBonusStatus = true;
+
+            StartSpeedBonus();
         }
     }
 

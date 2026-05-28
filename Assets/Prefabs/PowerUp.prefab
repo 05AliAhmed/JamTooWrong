@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c46e9a4f2c46d7498fe2c8e169a9fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  player: {fileID: 0}
+  sbm: {fileID: 0}
   groupOfPlayers: []
-  sr: {fileID: 0}
+  sr: {fileID: 2798157562681277814}
   poweruphit: 0
 --- !u!95 &8807682266270660685
 Animator:

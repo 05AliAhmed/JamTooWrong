@@ -6,19 +6,27 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public PlayerBehaviour player;
+    //public PlayerBehaviour player;
+    public SpeedBonusManagement sbm;
+    public TextSpawner TextSpawn;
     public List<GameObject> groupOfPlayers;
     public SpriteRenderer sr;
     public bool poweruphit;
 
+
+    float number;
     float cooldown = 5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+            
+        sbm = GameObject.FindGameObjectWithTag("Ball").GetComponent<SpeedBonusManagement>();
+        TextSpawn= GameObject.FindGameObjectWithTag("TextSpawn").GetComponent<TextSpawner>();
         poweruphit = false;
         sr=GetComponent<SpriteRenderer>();
         groupOfPlayers = GameObject.FindGameObjectsWithTag("Player").ToList();
+        randnum();
     }
 
     // Update is called once per frame
@@ -31,6 +39,8 @@ public class PowerUps : MonoBehaviour
         else if (cooldown <= 0f&&!poweruphit) {
             StartCoroutine(FadeSprite());
         }
+
+
     }
     void OnTriggerEnter2D(Collider2D collisioninfo)
     {
@@ -45,11 +55,23 @@ public class PowerUps : MonoBehaviour
             if (groupOfPlayers.Contains(collisioninfo.gameObject))
             {
                 Debug.Log("Player contact the power up");
-                Debug.Log("it is found");
+              
 
-                collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
+                if (number == 0)
+                {
+                    StartCoroutine(TextSpawn.DDMGText());
+                    Debug.Log("DDMG effect");
+                    collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
+                    poweruphit = true;
+                }
+                else if (number == 1)
+                {
+                    StartCoroutine(TextSpawn.SPEEDText());
+                    Debug.Log("Speed boost");
+                    sbm.isSpeedTrigger = true;
+                }
 
-                poweruphit = true;
+             
                 
                 Destroy(gameObject);
             }
@@ -87,5 +109,11 @@ public class PowerUps : MonoBehaviour
 
         Destroy(gameObject); 
 
+    }
+
+    public void randnum()
+    {
+        number = Random.Range(0, 2);
+        Debug.Log(number);
     }
 }
