@@ -262,6 +262,7 @@ public class BallBehaviour : MonoBehaviour
                 }
 
                 Debug.Log("Player 1 Parried");
+                FirstPlayer.SwipeAudio();
                 FirstPlayer.HitAudio();
                 FirstPlayer.PrintingTextTR(parryText);
             }
@@ -271,6 +272,7 @@ public class BallBehaviour : MonoBehaviour
                 Debug.Log("Player 1 Missed");
                 isInput = false;
                 FirstPlayer.DDMGeffect = false;
+                FirstPlayer.SwipeAudio();
                 FirstPlayer.MissAudio();
                 FirstPlayer.PrintingTextTR(missedText);
 
@@ -315,6 +317,7 @@ public class BallBehaviour : MonoBehaviour
                 }
 
                 Debug.Log("Player 2 Parried");
+                SecondPlayer.SwipeAudio();
                 SecondPlayer.HitAudio();
                 SecondPlayer.PrintingTextTL(parryText);
             }
@@ -324,6 +327,7 @@ public class BallBehaviour : MonoBehaviour
                 Debug.Log("Player 2 Missed");
                 isInput = false;
                 SecondPlayer.DDMGeffect = false;
+                SecondPlayer.SwipeAudio();
                 SecondPlayer.MissAudio();
                 SecondPlayer.PrintingTextTL(missedText);
             }

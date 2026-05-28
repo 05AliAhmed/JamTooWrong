@@ -59,14 +59,14 @@ public class PowerUps : MonoBehaviour
 
                 if (number == 0)
                 {
-                    StartCoroutine(TextSpawn.DDMGText());
+                    TextSpawn.StartCoroutine(TextSpawn.DDMGText());
                     Debug.Log("DDMG effect");
                     collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
                     poweruphit = true;
                 }
                 else if (number == 1)
                 {
-                    StartCoroutine(TextSpawn.SPEEDText());
+                    TextSpawn.StartCoroutine(TextSpawn.SPEEDText());
                     Debug.Log("Speed boost");
                     sbm.isSpeedTrigger = true;
                 }

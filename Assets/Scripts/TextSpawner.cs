@@ -23,16 +23,18 @@ public class TextSpawner : MonoBehaviour
     public IEnumerator DDMGText()
     {
         DDMGtext.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
        
+     
+        
         DDMGtext.SetActive(false);
     }
     public IEnumerator SPEEDText()
     {
         {
             SPEEDtext.SetActive(true);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(2);
 
 
             SPEEDtext.SetActive(false);
