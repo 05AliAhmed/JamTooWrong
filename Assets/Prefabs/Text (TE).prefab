@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 332111651456145417}
   - component: {fileID: 6465434565196948888}
   - component: {fileID: 753992157757782280}
+  - component: {fileID: 2693376022182678390}
   m_Layer: 0
   m_Name: Text (TE)
   m_TagString: Untagged
@@ -181,3 +182,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6465434565196948888}
   m_maskType: 0
+--- !u!95 &2693376022182678390
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913974243569563909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c4eb85ba66d6447459090c8b0f6524b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

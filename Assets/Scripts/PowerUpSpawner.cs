@@ -1,28 +1,40 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PowerUpSpawner : MonoBehaviour
 {
     public GameObject powerups;
+    //public SpriteRenderer sr;
+    public float cooldown =8f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (cooldown > 0)
         {
+            cooldown-=Time.deltaTime;   
+        }
+        else if(cooldown <= 0)
+        {
+            cooldown = 10f;
             SpawnObject();
         }
+        
+           
+        
     }
 
     public void SpawnObject()
     {
         // Random screen position
-        float randomX = Random.Range(0f, Screen.width/2);
-        float randomY = Random.Range(0f, Screen.height);
+        float randomX = Random.Range(100f, Screen.width-100f);
+        float randomY = Random.Range(100f, Screen.height-100f);
 
         // Convert screen position to world position
         Vector2 screenPos = new Vector2(randomX, randomY);
@@ -31,4 +43,7 @@ public class PowerUpSpawner : MonoBehaviour
 
         Instantiate(powerups, worldPos, Quaternion.identity);
     }
+
+
+
 }

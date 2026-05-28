@@ -51,7 +51,7 @@ public class PlayerBehaviour : MonoBehaviour
         GameObject spawnedText = Instantiate(
             text,
             gameObject.transform.position + new Vector3(-1f, 1f, 0f),
-            Quaternion.identity
+            Quaternion.Euler(0f, 0f, 25f)
         );
 
         yield return new WaitForSeconds(1f);
@@ -68,7 +68,7 @@ public class PlayerBehaviour : MonoBehaviour
         GameObject spawnedText = Instantiate(
             text,
             gameObject.transform.position + new Vector3(1f, 1f, 0f),
-            Quaternion.identity
+            Quaternion.Euler(0f, 0f, -25f)
         );
 
         yield return new WaitForSeconds(1f);
