@@ -6,7 +6,7 @@ public class BallBehaviour : MonoBehaviour
     public Transform PlayerTwo; //and this is the player 2 object.
 
     public float BallSpeed = 5f; //the base/original speed of the ball
-    public float BallSpeedLimit = 25.0f; //the limit for the ball's speed
+    public float BallSpeedLimit = 15.0f; //the limit for the ball's speed
 
     public int playerTurn;
 
@@ -16,11 +16,14 @@ public class BallBehaviour : MonoBehaviour
     public GameObject HealthBarSystem;
     public HealthBarSystem HBS;
 
+    public bool isInput;// diable whether the player can click the mouse again or not
+
    // public bool isInside;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerTurn = 1; //this means the ball will approach player 1 at the beginning of the game
+        isInput = true;
     }
 
     //this function checks if the ball is in the parry zone
@@ -64,6 +67,7 @@ public class BallBehaviour : MonoBehaviour
                 HBS.P1LoseHealth();
                 //FirstPlayer.isHit = true;
                 playerTurn =2;
+                BallSpeed = 5f;
             }
 
             else if (playerTurn == 2)
@@ -72,6 +76,7 @@ public class BallBehaviour : MonoBehaviour
                 HBS.P2LoseHealth(); 
                 //SecondPlayer.isHit = true;
                 playerTurn = 1;
+                BallSpeed = 5f;
             }
         }
     }
@@ -84,6 +89,8 @@ public class BallBehaviour : MonoBehaviour
         FirstPlayer.parryPermission = false;
         SecondPlayer.isHit = false;
         FirstPlayer.isHit = false;
+        isInput = true;
+
     }
     // Update is called once per frame
     void Update()
@@ -142,7 +149,7 @@ public class BallBehaviour : MonoBehaviour
              }
          }
         */
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&isInput==true)
         {
             // Player 1 turn
             if (playerTurn == 1)
@@ -150,6 +157,7 @@ public class BallBehaviour : MonoBehaviour
                 if (FirstPlayer.parryPermission)
                 {
                     playerTurn = 2;
+                    transform.position += (PlayerTwo.position - transform.position).normalized * 0.5f;
 
                     if (BallSpeed < BallSpeedLimit)
                     {
@@ -157,7 +165,7 @@ public class BallBehaviour : MonoBehaviour
                     }
                     else if (BallSpeed >= BallSpeedLimit)
                     {
-                        BallSpeed=25f;
+                        BallSpeed=BallSpeedLimit;
                     }
 
                     Debug.Log("Player 1 Parried");
@@ -166,6 +174,7 @@ public class BallBehaviour : MonoBehaviour
                 {
                     //playerTurn = 2;
                     Debug.Log("Player 1 Missed");
+                    isInput =false;
                 }
             }
 
@@ -175,6 +184,7 @@ public class BallBehaviour : MonoBehaviour
                 if (SecondPlayer.parryPermission)
                 {
                     playerTurn = 1;
+                    transform.position += (PlayerOne.position - transform.position).normalized * 0.5f;
 
                     if (BallSpeed < BallSpeedLimit)
                     {
@@ -182,7 +192,7 @@ public class BallBehaviour : MonoBehaviour
                     }
                     else if (BallSpeed >= BallSpeedLimit)
                     {
-                        BallSpeed = 25f;
+                        BallSpeed = BallSpeedLimit;
                     }
 
                     Debug.Log("Player 2 Parried");
@@ -191,6 +201,7 @@ public class BallBehaviour : MonoBehaviour
                 {
                     //playerTurn = 1;
                     Debug.Log("Player 2 Missed");
+                    isInput = false;
                 }
             }
         }
