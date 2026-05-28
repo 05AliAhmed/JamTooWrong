@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -12,8 +13,8 @@ public class PlayerBehaviour : MonoBehaviour
     public bool isHit;
     public bool isMissed;
 
-    public BallBehaviour ball;
-    public GameObject missedText;
+    //public BallBehaviour ball;
+   // public GameObject missedText;
    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,9 +35,40 @@ public class PlayerBehaviour : MonoBehaviour
 
         transform.position += (Vector3)(movement * PlayerSpeed * Time.deltaTime);*/
     }
-    public void printText()
+
+
+
+    public IEnumerator PrintTextTL(GameObject text)
     {
-        Instantiate(missedText, transform.position, Quaternion.identity);
+        GameObject spawnedText = Instantiate(
+            text,
+            gameObject.transform.position + new Vector3(-1f, 1f, 0f),
+            Quaternion.identity
+        );
+
+        yield return new WaitForSeconds(1f);
+
+        Destroy(spawnedText);
+    }
+    public void PrintingTextTL(GameObject text)
+    {
+        StartCoroutine(PrintTextTL(text));
     }
 
+    public IEnumerator PrintTextTR(GameObject text)
+    {
+        GameObject spawnedText = Instantiate(
+            text,
+            gameObject.transform.position + new Vector3(1f, 1f, 0f),
+            Quaternion.identity
+        );
+
+        yield return new WaitForSeconds(1f);
+
+        Destroy(spawnedText);
+    }
+    public void PrintingTextTR(GameObject text)
+    {
+        StartCoroutine(PrintTextTR(text));
+    }
 }

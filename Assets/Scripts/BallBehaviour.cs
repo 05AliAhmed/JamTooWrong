@@ -18,6 +18,9 @@ public class BallBehaviour : MonoBehaviour
 
     public bool isInput;// diable whether the player can click the mouse again or not
 
+    public GameObject parryText;
+    public GameObject missedText;
+    //public GameObject parryText;
    // public bool isInside;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,6 +71,7 @@ public class BallBehaviour : MonoBehaviour
                 HBS.P1LoseHealth();
                 //FirstPlayer.isHit = true;
                 playerTurn =2;
+                
                 BallSpeed = 5f;
             }
 
@@ -77,6 +81,7 @@ public class BallBehaviour : MonoBehaviour
                 HBS.P2LoseHealth(); 
                 //SecondPlayer.isHit = true;
                 playerTurn = 1;
+                
                 BallSpeed = 5f;
             }
         }
@@ -172,13 +177,14 @@ public class BallBehaviour : MonoBehaviour
                     }
 
                     Debug.Log("Player 1 Parried");
+                    FirstPlayer.PrintingTextTR(parryText);
                 }
                 else
                 {
                     //playerTurn = 2;
                     Debug.Log("Player 1 Missed");
                     isInput =false;
-                    FirstPlayer.printText();
+                    FirstPlayer.PrintingTextTR(missedText);
                 }
             }
 
@@ -200,13 +206,14 @@ public class BallBehaviour : MonoBehaviour
                     }
 
                     Debug.Log("Player 2 Parried");
+                    SecondPlayer.PrintingTextTL(parryText);
                 }
                 else
                 {
                     //playerTurn = 1;
                     Debug.Log("Player 2 Missed");
                     isInput = false;
-                    SecondPlayer.printText();
+                    SecondPlayer.PrintingTextTL(missedText);
                 }
             }
         }
