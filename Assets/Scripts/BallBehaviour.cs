@@ -230,94 +230,96 @@ public class BallBehaviour : MonoBehaviour
              }
          }
         */
-        if (Input.GetMouseButtonDown(0)&&isInput==true)
+        if (Input.GetMouseButtonDown(0) && isInput == true && playerTurn == 1)
         {
-            // Player 1 turn
-            if (playerTurn == 1)
+
+
+            if (FirstPlayer.parryPermission)
             {
-                if (FirstPlayer.parryPermission)
+                playerTurn = 2;
+                transform.position += (PlayerTwo.position - transform.position).normalized * 0.5f;
+                if (FirstPlayer.DDMGeffect == true)
                 {
-                    playerTurn = 2;
-                    transform.position += (PlayerTwo.position - transform.position).normalized * 0.5f;
-                    if (FirstPlayer.DDMGeffect == true)
-                    {
-                        P1ballonDDMG = true;
-                        FirstPlayer.DDMGeffect = false;
-                    }
-
-                    if (P2ballonDDMG)
-                    {
-                        P2ballonDDMG= false;
-                    }
-
-
-
-                    if (BallSpeed < BallSpeedLimit)
-                    {
-                        BallSpeed++;
-                        animSpeed.speed++;
-                    }
-                    else if (BallSpeed >= BallSpeedLimit)
-                    {
-                        BallSpeed=BallSpeedLimit;
-                    }
-
-                    Debug.Log("Player 1 Parried");
-                    FirstPlayer.PrintingTextTR(parryText);
+                    P1ballonDDMG = true;
+                    FirstPlayer.DDMGeffect = false;
                 }
-                else
+
+                if (P2ballonDDMG)
                 {
-                    //playerTurn = 2;
-                    Debug.Log("Player 1 Missed");
-                    isInput =false;
-                    FirstPlayer.DDMGeffect=false;
-                    FirstPlayer.PrintingTextTR(missedText);
-                
+                    P2ballonDDMG = false;
                 }
+
+
+
+                if (BallSpeed < BallSpeedLimit)
+                {
+                    BallSpeed++;
+                    animSpeed.speed++;
+                }
+                else if (BallSpeed >= BallSpeedLimit)
+                {
+                    BallSpeed = BallSpeedLimit;
+                }
+
+                Debug.Log("Player 1 Parried");
+                FirstPlayer.PrintingTextTR(parryText);
+            }
+            else
+            {
+                //playerTurn = 2;
+                Debug.Log("Player 1 Missed");
+                isInput = false;
+                FirstPlayer.DDMGeffect = false;
+                FirstPlayer.PrintingTextTR(missedText);
+
             }
 
-            // Player 2 turn
-            else if (playerTurn == 2)
+        }
+        // Player 2 turn
+         if (Input.GetMouseButtonDown(1) && isInput == true && playerTurn == 2)
+        {
+            if (SecondPlayer.parryPermission)
             {
-                if (SecondPlayer.parryPermission)
-                {
-                 
-                    playerTurn = 1;
-                    transform.position += (PlayerOne.position - transform.position).normalized * 0.5f;
-                    if (SecondPlayer.DDMGeffect == true)
-                    {
-                        P2ballonDDMG = true;
-                        SecondPlayer.DDMGeffect = false;
-                    }
-                    if (P1ballonDDMG)
-                    {
-                        P1ballonDDMG= false;
-                    }
 
-                    if (BallSpeed < BallSpeedLimit)
-                    {
-                        BallSpeed++;
-                       
-                        animSpeed.speed++;
-                    }
-                    else if (BallSpeed >= BallSpeedLimit)
-                    {
-                        BallSpeed = BallSpeedLimit;
-                    }
-
-                    Debug.Log("Player 2 Parried");
-                    SecondPlayer.PrintingTextTL(parryText);
-                }
-                else
+                playerTurn = 1;
+                transform.position += (PlayerOne.position - transform.position).normalized * 0.5f;
+                if (SecondPlayer.DDMGeffect == true)
                 {
-                    //playerTurn = 1;
-                    Debug.Log("Player 2 Missed");
-                    isInput = false;
-                    SecondPlayer.DDMGeffect=false;
-                    SecondPlayer.PrintingTextTL(missedText);
+                    P2ballonDDMG = true;
+                    SecondPlayer.DDMGeffect = false;
                 }
+                if (P1ballonDDMG)
+                {
+                    P1ballonDDMG = false;
+                }
+
+                if (BallSpeed < BallSpeedLimit)
+                {
+                    BallSpeed++;
+
+                    animSpeed.speed++;
+                }
+                else if (BallSpeed >= BallSpeedLimit)
+                {
+                    BallSpeed = BallSpeedLimit;
+                }
+
+                Debug.Log("Player 2 Parried");
+                SecondPlayer.PrintingTextTL(parryText);
+            }
+            else
+            {
+                //playerTurn = 1;
+                Debug.Log("Player 2 Missed");
+                isInput = false;
+                SecondPlayer.DDMGeffect = false;
+                SecondPlayer.PrintingTextTL(missedText);
             }
         }
+        
+        
+
+
         //this code makes sure player turns are cycled between player 1 and 2 by setting playerTurn back to 1 every time its more than 2,
         //creating a loop that makes switching player turns as easy as "playerTurn++;".
         if (playerTurn > 2)
