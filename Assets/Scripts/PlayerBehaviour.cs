@@ -9,9 +9,9 @@ public class PlayerBehaviour : MonoBehaviour
     //public float PlayerSpeed = 7f;
     public bool parryPermission; //used by the ball to decide which player can parry
     public bool playerTurn;
-    public bool isInside;
-    public bool isHit;
-    public bool isMissed;
+   
+ 
+   
 
     //public BallBehaviour ball;
    // public GameObject missedText;

@@ -93,8 +93,7 @@ public class BallBehaviour : MonoBehaviour
         //this simply means both players aren't able to parry as soon as the ball leaves the parry zone
         SecondPlayer.parryPermission = false;
         FirstPlayer.parryPermission = false;
-        SecondPlayer.isHit = false;
-        FirstPlayer.isHit = false;
+      
         isInput = true;
 
         
