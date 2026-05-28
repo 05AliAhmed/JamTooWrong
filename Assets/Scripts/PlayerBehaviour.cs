@@ -15,8 +15,9 @@ public class PlayerBehaviour : MonoBehaviour
     public int MaxHealth = 3;
     public int playerHealth;
 
-    public AudioSource hitaudio;
-
+    public AudioSource dmgAudio;
+    public AudioSource missedAudio;
+    public AudioSource hitAudio;
 
     //public BallBehaviour ball;
     // public GameObject missedText;
@@ -25,7 +26,9 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        hitaudio.Stop();
+        dmgAudio.Stop();
+        missedAudio.Stop();
+        hitAudio.Stop();
         isDead = false;
         DDMGeffect = false;
          playerHealth = MaxHealth;
@@ -80,8 +83,17 @@ public class PlayerBehaviour : MonoBehaviour
         StartCoroutine(PrintTextTR(text));
     }
 
+    public void DmgAudio()
+    {
+        dmgAudio.Play();
+    }
+
+    public void MissAudio()
+    {
+        missedAudio.Play();
+    }
     public void HitAudio()
     {
-        hitaudio.Play();
+        hitAudio.Play();
     }
 }

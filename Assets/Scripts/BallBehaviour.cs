@@ -88,7 +88,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    FirstPlayer.HitAudio();
+                    FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 2;
                     
                     //CheckHealth();
@@ -102,7 +102,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    FirstPlayer.HitAudio();
+                    FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 1;
 
                     //CheckHealth();
@@ -118,7 +118,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    SecondPlayer.HitAudio();
+                    SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 2;
                    // CheckHealth();
                 }
@@ -131,7 +131,7 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    SecondPlayer.HitAudio();
+                    SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 1;
                     //CheckHealth();
                 }
@@ -289,6 +289,7 @@ public class BallBehaviour : MonoBehaviour
                 }
 
                 Debug.Log("Player 1 Parried");
+                FirstPlayer.HitAudio();
                 FirstPlayer.PrintingTextTR(parryText);
             }
             else
@@ -297,6 +298,7 @@ public class BallBehaviour : MonoBehaviour
                 Debug.Log("Player 1 Missed");
                 isInput = false;
                 FirstPlayer.DDMGeffect = false;
+                FirstPlayer.MissAudio();
                 FirstPlayer.PrintingTextTR(missedText);
 
             }
@@ -334,6 +336,7 @@ public class BallBehaviour : MonoBehaviour
                 }
 
                 Debug.Log("Player 2 Parried");
+                SecondPlayer.HitAudio();
                 SecondPlayer.PrintingTextTL(parryText);
             }
             else
@@ -342,6 +345,7 @@ public class BallBehaviour : MonoBehaviour
                 Debug.Log("Player 2 Missed");
                 isInput = false;
                 SecondPlayer.DDMGeffect = false;
+                SecondPlayer.MissAudio();
                 SecondPlayer.PrintingTextTL(missedText);
             }
         }
