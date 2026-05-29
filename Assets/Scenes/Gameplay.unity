@@ -4137,6 +4137,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1061214127}
     - target: {fileID: 665987754533009275, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
+      propertyPath: objectSpawner
+      value: 
+      objectReference: {fileID: 41811630}
+    - target: {fileID: 665987754533009275, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
       propertyPath: BallSpeedLimit
       value: 25
       objectReference: {fileID: 0}
