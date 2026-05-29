@@ -44,11 +44,11 @@ public class TextSpawner : MonoBehaviour
         }
     }
 
-    public IEnumerator ShieldUpTxt()
-    {
-        shielduptxt.SetActive(true);
-        yield return new WaitForSeconds(2);
+    // public IEnumerator ShieldUpTxt()
+    // {
+    //     shielduptxt.SetActive(true);
+    //     yield return new WaitForSeconds(2);
 
-        shielduptxt.SetActive(false);
-    }
+    //     shielduptxt.SetActive(false);
+    // }
 }

@@ -22,4 +22,10 @@ public class MainMenu : MonoBehaviour
     {
         GameManager.instance.GMLoadScene(_sceneindex);
     }
+
+    public void QuitGAME()
+    {
+        Application.Quit();
+        Debug.Log("quit is working");
+    }
 }

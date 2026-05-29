@@ -72,12 +72,12 @@ public class PowerUps : MonoBehaviour
                     Debug.Log("Speed boost");
                     sbm.isSpeedTrigger = true;
                 }
-                else if(number == 2)
-                {
-                    TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt());
-                    // Debug.Log("Shield")
-                    ShieldUp();
-                }
+                // else if(number == 2)
+                // {
+                //     TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt());
+                //     // Debug.Log("Shield")
+                //     ShieldUp();
+                // }
 
 
 
@@ -121,18 +121,18 @@ public class PowerUps : MonoBehaviour
 
     public void randnum()
     {
-        number = Random.Range(0, 3);
+        number = Random.Range(0, 2);
         Debug.Log(number);
     }
 
 
 
-public void ShieldUp()
-    {
-        //show shield sprite
-        healthsys = false;
-        Debug.Log(healthsys);
-    }
+// public void ShieldUp()
+//     {
+//         //show shield sprite
+//         healthsys = false;
+//         Debug.Log(healthsys);
+//     }
 }
 /*using System.Collections;
 using System.Collections.Generic;

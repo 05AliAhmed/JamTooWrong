@@ -40,9 +40,9 @@ public class HealthBarSystem : MonoBehaviour
         P2heart2 = P2secondHealth.GetComponent<HealthBar>();
         P2heart3 = P2thirdHealth.GetComponent<HealthBar>();
 
-        powerUps = powerupscrpt.GetComponent<PowerUps>();
+        // powerUps = powerupscrpt.GetComponent<PowerUps>();
 
-        Debug.Log(powerUps.healthsys);
+        // Debug.Log(powerUps.healthsys);
 
         //firstPlayerS = firstPlayer.GetComponent<PlayerBehaviour>();
         //secondPlayerS = secondPlayer.GetComponent<PlayerBehaviour>();
@@ -76,19 +76,19 @@ public class HealthBarSystem : MonoBehaviour
     public void P1LoseHealth()
     {
         //  && !powerUps.healthsys
-        if(powerUps.healthsys) {
-            Debug.Log("This is shield's status");
-            Debug.Log(powerUps.healthsys);
-        }
-        if (!P1heart1.healthEmpty && powerUps.healthsys)
+        // if(powerUps.healthsys) {
+        //     Debug.Log("This is shield's status");
+        //     Debug.Log(powerUps.healthsys);
+        // }
+        if (!P1heart1.healthEmpty)
         {
             P1heart1.HealthLost();
         }
-        else if (!P1heart2.healthEmpty && powerUps.healthsys)
+        else if (!P1heart2.healthEmpty)
         {
             P1heart2.HealthLost();
         }
-        else if (!P1heart3.healthEmpty && powerUps.healthsys)
+        else if (!P1heart3.healthEmpty)
         {
             P1heart3.HealthLost();
         }
