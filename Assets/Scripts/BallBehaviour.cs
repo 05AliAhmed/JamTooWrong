@@ -6,7 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 public class BallBehaviour : MonoBehaviour
 {
     public Camera mainCam;
-
     public GameObject objectSpawner;
     public Transform PlayerOne; //this is the player 1 game object that the ball will follow
     public Transform PlayerTwo; //and this is the player 2 object.

@@ -74,7 +74,7 @@ public class PowerUps : MonoBehaviour
                 }
                 else if (number == 2)
                 {
-                    TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt());
+                    TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt ());
                     Debug.Log("ShieldUP");
                     collisioninfo.GetComponent<PlayerBehaviour>().isShield = true;
                 }
