@@ -12,29 +12,35 @@ public class HealthBarSystem : MonoBehaviour
     public GameObject P1secondHealth;
     public GameObject P1thirdHealth;
 
+    public GameObject powerupscrpt;
+
     public GameObject P2firstHealth;
     public GameObject P2secondHealth;
     public GameObject P2thirdHealth;
 
-    private HealthBar P1firstScript;
-    private HealthBar P1secondScript;
-    private HealthBar P1thirdScript;
+    private HealthBar P1heart1;
+    private HealthBar P1heart2;
+    private HealthBar P1heart3;
 
-    private HealthBar P2firstScript;
-    private HealthBar P2secondScript;
-    private HealthBar P2thirdScript;
+    private HealthBar P2heart1;
+    private HealthBar P2heart2;
+    private HealthBar P2heart3;
 
     bool dead;
+    // bool shieldUP = false;
+    PowerUps powerUps;
 
     void Start()
     {
-        P1firstScript = P1firstHealth.GetComponent<HealthBar>();
-        P1secondScript = P1secondHealth.GetComponent<HealthBar>();
-        P1thirdScript = P1thirdHealth.GetComponent<HealthBar>();
+        P1heart1 = P1firstHealth.GetComponent<HealthBar>();
+        P1heart2 = P1secondHealth.GetComponent<HealthBar>();
+        P1heart3 = P1thirdHealth.GetComponent<HealthBar>();
 
-        P2firstScript = P2firstHealth.GetComponent<HealthBar>();
-        P2secondScript = P2secondHealth.GetComponent<HealthBar>();
-        P2thirdScript = P2thirdHealth.GetComponent<HealthBar>();
+        P2heart1 = P2firstHealth.GetComponent<HealthBar>();
+        P2heart2 = P2secondHealth.GetComponent<HealthBar>();
+        P2heart3 = P2thirdHealth.GetComponent<HealthBar>();
+
+        powerUps = powerupscrpt.GetComponent<PowerUps>();
 
         //firstPlayerS = firstPlayer.GetComponent<PlayerBehaviour>();
         //secondPlayerS = secondPlayer.GetComponent<PlayerBehaviour>();
@@ -55,7 +61,11 @@ public class HealthBarSystem : MonoBehaviour
             P2LoseHealth();
             secondPlayerS.isHit = false;
         }*/
-       
+        if (Input.GetMouseButtonDown(1))
+      
+        {
+            AddHealth();
+        }
 
         /*if (!dead &&firstScript.healthEmpty && secondScript.healthEmpty && thirdScript.healthEmpty == true)
         {
@@ -67,33 +77,35 @@ public class HealthBarSystem : MonoBehaviour
 
     public void P1LoseHealth()
     {
-        if (!P1firstScript.healthEmpty)
+        //  && !powerUps.healthsys
+        // if()
+        if (!P1heart1.healthEmpty )
         {
-            P1firstScript.HealthLost();
+            P1heart1.HealthLost();
         }
-        else if (!P1secondScript.healthEmpty)
+        else if (!P1heart2.healthEmpty )
         {
-            P1secondScript.HealthLost();
+            P1heart2.HealthLost();
         }
-        else if (!P1thirdScript.healthEmpty)
+        else if (!P1heart3.healthEmpty)
         {
-            P1thirdScript.HealthLost();
+            P1heart3.HealthLost();
         }
     }
 
     public void P2LoseHealth()
     {
-        if (!P2firstScript.healthEmpty)
+        if (!P2heart1.healthEmpty)
         {
-            P2firstScript.HealthLost();
+            P2heart1.HealthLost();
         }
-        else if (!P2secondScript.healthEmpty)
+        else if (!P2heart2.healthEmpty)
         {
-            P2secondScript.HealthLost();
+            P2heart2.HealthLost();
         }
-        else if (!P2thirdScript.healthEmpty)
+        else if (!P2heart3.healthEmpty)
         {
-            P2thirdScript.HealthLost();
+            P2heart3.HealthLost();
         }
     }
     public void P1DoubleLoseHealth()
@@ -113,17 +125,17 @@ public class HealthBarSystem : MonoBehaviour
 
     void AddHealth()
     {
-        if (P1thirdScript.healthEmpty==true)
+        if (P1heart3.healthEmpty==true)
         {
-            P1thirdScript.AddHealth();
+            P1heart3.AddHealth();
         }
-        else if (P1secondScript.healthEmpty==true)
+        else if (P1heart2.healthEmpty==true)
         {
-            P1secondScript.AddHealth();
+            P1heart2.AddHealth();
         }
-        else if (P1firstScript.healthEmpty==true)
+        else if (P1heart1.healthEmpty==true)
         {
-            P1firstScript.AddHealth();
+            P1heart1.AddHealth();
         }
     }
 }

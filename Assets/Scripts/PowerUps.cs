@@ -6,27 +6,20 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    //public PlayerBehaviour player;
-    public SpeedBonusManagement sbm;
-    public TextSpawner TextSpawn;
+    public PlayerBehaviour player;
     public List<GameObject> groupOfPlayers;
     public SpriteRenderer sr;
     public bool poweruphit;
+    public bool healthsys = false;
 
-
-    float number;
     float cooldown = 5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-            
-        sbm = GameObject.FindGameObjectWithTag("Ball").GetComponent<SpeedBonusManagement>();
-        TextSpawn= GameObject.FindGameObjectWithTag("TextSpawn").GetComponent<TextSpawner>();
         poweruphit = false;
         sr=GetComponent<SpriteRenderer>();
         groupOfPlayers = GameObject.FindGameObjectsWithTag("Player").ToList();
-        randnum();
     }
 
     // Update is called once per frame
@@ -39,8 +32,6 @@ public class PowerUps : MonoBehaviour
         else if (cooldown <= 0f&&!poweruphit) {
             StartCoroutine(FadeSprite());
         }
-
-
     }
     void OnTriggerEnter2D(Collider2D collisioninfo)
     {
@@ -55,23 +46,13 @@ public class PowerUps : MonoBehaviour
             if (groupOfPlayers.Contains(collisioninfo.gameObject))
             {
                 Debug.Log("Player contact the power up");
-              
+                Debug.Log("it is found");
 
-                if (number == 0)
-                {
-                    TextSpawn.StartCoroutine(TextSpawn.DDMGText());
-                    Debug.Log("DDMG effect");
-                    collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
-                    poweruphit = true;
-                }
-                else if (number == 1)
-                {
-                    TextSpawn.StartCoroutine(TextSpawn.SPEEDText());
-                    Debug.Log("Speed boost");
-                    sbm.isSpeedTrigger = true;
-                }
+                collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
 
-             
+                poweruphit = true;
+                // shieldup = true;
+                // ShieldUp();
                 
                 Destroy(gameObject);
             }
@@ -111,9 +92,9 @@ public class PowerUps : MonoBehaviour
 
     }
 
-    public void randnum()
+    public void ShieldUp()
     {
-        number = Random.Range(0, 2);
-        Debug.Log(number);
+        //show shield sprite
+        healthsys = true;
     }
 }
