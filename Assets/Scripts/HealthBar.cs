@@ -8,6 +8,7 @@ public class HealthBar : MonoBehaviour
     public Sprite healthRegain;
     public bool healthEmpty=false;
     public Animator healthanim;
+    // public bool healthsys = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,9 +23,12 @@ public class HealthBar : MonoBehaviour
     }
     public void HealthLost()
     {
-        health.sprite = healthLost;
-        healthEmpty = true;
-        healthanim.SetBool("isAnimating",true);
+        // if(healthsys == true)
+        // {
+            health.sprite = healthLost;
+            healthEmpty = true;
+            healthanim.SetBool("isAnimating",true);
+        // }
         //heathanim.enabled = true;
     }
     public void AddHealth()

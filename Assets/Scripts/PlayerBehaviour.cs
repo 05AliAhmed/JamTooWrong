@@ -16,12 +16,17 @@ public class PlayerBehaviour : MonoBehaviour
     public int MaxHealth = 3;
     public int playerHealth;
 
+    // public GameObject player1;
+    // public GameObject player2;
+
     public AudioSource dmgAudio;
     public AudioSource missedAudio;
     public AudioSource hitAudio;
     public AudioSource swipeAudio;
 
     public Animator playerAnim;
+
+    public float deathAnimationtime;
     //public BallBehaviour ball;
     // public GameObject missedText;
 
@@ -35,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
         swipeAudio.Stop();
         isDead = false;
         DDMGeffect = false;
-         playerHealth = MaxHealth;
+        playerHealth = MaxHealth;
 }
 
     // Update is called once per frame
@@ -47,9 +52,22 @@ public class PlayerBehaviour : MonoBehaviour
         {
             isDead = true;
             playerAnim.SetBool("isDead", true);
+            StartCoroutine(playerDestroy());
+            // gameObject.SetActive(false);
+            // Destroy(player1);
             Debug.Log("Game Over");
+            Debug.Log("first me");
             //SceneManager.LoadScene(0);
         }
+    }
+
+    public IEnumerator playerDestroy()
+    {
+        Debug.Log("second me");
+        yield return new WaitForSeconds(deathAnimationtime);
+        Debug.Log("third me");
+        gameObject.SetActive(false);
+        // Destroy(gameObject);
     }
 
 

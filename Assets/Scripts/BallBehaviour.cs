@@ -89,7 +89,7 @@ public class BallBehaviour : MonoBehaviour
                     HBS.P1DoubleLoseHealth();
                     playerTurn = 2;
 
-                    BallSpeed = 5f;
+                    BallSpeed = 1f; // changed from 5 to 1
                     animSpeed.speed = 1f;
                     FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 2;
@@ -104,7 +104,7 @@ public class BallBehaviour : MonoBehaviour
                     //FirstPlayer.isHit = true;
                     playerTurn = 2;
 
-                    BallSpeed = 5f;
+                    BallSpeed = 1f; // changed from 5 to 1
                     animSpeed.speed = 1f;
                     FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 1;

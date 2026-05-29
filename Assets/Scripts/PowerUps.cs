@@ -7,12 +7,12 @@ using UnityEngine;
 public class PowerUps : MonoBehaviour
 {
     //public PlayerBehaviour player;
-    public SpeedBonusManagement sbm;
-    public TextSpawner TextSpawn;
+     SpeedBonusManagement sbm;
+     TextSpawner TextSpawn;
     public List<GameObject> groupOfPlayers;
-    public SpriteRenderer sr;
+     SpriteRenderer sr;
     public bool poweruphit;
-    public bool healthsys=false;
+    public bool healthsys;
 
     float number;
     float cooldown = 5f;
@@ -24,6 +24,7 @@ public class PowerUps : MonoBehaviour
         sbm = GameObject.FindGameObjectWithTag("Ball").GetComponent<SpeedBonusManagement>();
         TextSpawn = GameObject.FindGameObjectWithTag("TextSpawn").GetComponent<TextSpawner>();
         poweruphit = false;
+        healthsys = true;
         sr = GetComponent<SpriteRenderer>();
         groupOfPlayers = GameObject.FindGameObjectsWithTag("Player").ToList();
         randnum();
@@ -71,6 +72,12 @@ public class PowerUps : MonoBehaviour
                     Debug.Log("Speed boost");
                     sbm.isSpeedTrigger = true;
                 }
+                else if(number == 2)
+                {
+                    TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt());
+                    // Debug.Log("Shield")
+                    ShieldUp();
+                }
 
 
 
@@ -114,7 +121,7 @@ public class PowerUps : MonoBehaviour
 
     public void randnum()
     {
-        number = Random.Range(0, 2);
+        number = Random.Range(0, 3);
         Debug.Log(number);
     }
 
@@ -123,7 +130,8 @@ public class PowerUps : MonoBehaviour
 public void ShieldUp()
     {
         //show shield sprite
-        healthsys = true;
+        healthsys = false;
+        Debug.Log(healthsys);
     }
 }
 /*using System.Collections;

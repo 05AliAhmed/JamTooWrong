@@ -43,7 +43,7 @@ public class PowerUpSpawner : MonoBehaviour
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
         Instantiate(powerups, worldPos, Quaternion.identity);
-        // Instantiate(shieldup, worldPos, Quaternion.identity);
+        Instantiate(shieldup, worldPos, Quaternion.identity);
     }
 
 
