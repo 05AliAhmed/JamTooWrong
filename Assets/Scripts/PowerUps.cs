@@ -6,32 +6,42 @@ using UnityEngine;
 
 public class PowerUps : MonoBehaviour
 {
-    public PlayerBehaviour player;
+    //public PlayerBehaviour player;
+    public SpeedBonusManagement sbm;
+    public TextSpawner TextSpawn;
     public List<GameObject> groupOfPlayers;
     public SpriteRenderer sr;
     public bool poweruphit;
-    public bool healthsys = false;
+    public bool healthsys=false;
 
+    float number;
     float cooldown = 5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+
+        sbm = GameObject.FindGameObjectWithTag("Ball").GetComponent<SpeedBonusManagement>();
+        TextSpawn = GameObject.FindGameObjectWithTag("TextSpawn").GetComponent<TextSpawner>();
         poweruphit = false;
-        sr=GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
         groupOfPlayers = GameObject.FindGameObjectsWithTag("Player").ToList();
+        randnum();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (cooldown > 0f&&!poweruphit)
+        if (cooldown > 0f && !poweruphit)
         {
             cooldown -= Time.deltaTime;
         }
-        else if (cooldown <= 0f&&!poweruphit) {
+        else if (cooldown <= 0f && !poweruphit)
+        {
             StartCoroutine(FadeSprite());
         }
+
+
     }
     void OnTriggerEnter2D(Collider2D collisioninfo)
     {
@@ -46,14 +56,24 @@ public class PowerUps : MonoBehaviour
             if (groupOfPlayers.Contains(collisioninfo.gameObject))
             {
                 Debug.Log("Player contact the power up");
-                Debug.Log("it is found");
 
-                collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
 
-                poweruphit = true;
-                // shieldup = true;
-                // ShieldUp();
-                
+                if (number == 0)
+                {
+                    TextSpawn.StartCoroutine(TextSpawn.DDMGText());
+                    Debug.Log("DDMG effect");
+                    collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
+                    poweruphit = true;
+                }
+                else if (number == 1)
+                {
+                    TextSpawn.StartCoroutine(TextSpawn.SPEEDText());
+                    Debug.Log("Speed boost");
+                    sbm.isSpeedTrigger = true;
+                }
+
+
+
                 Destroy(gameObject);
             }
         }
@@ -88,11 +108,19 @@ public class PowerUps : MonoBehaviour
             0f
         );
 
-        Destroy(gameObject); 
+        Destroy(gameObject);
 
     }
 
-    public void ShieldUp()
+    public void randnum()
+    {
+        number = Random.Range(0, 2);
+        Debug.Log(number);
+    }
+
+
+
+public void ShieldUp()
     {
         //show shield sprite
         healthsys = true;
