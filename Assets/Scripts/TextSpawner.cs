@@ -5,12 +5,13 @@ public class TextSpawner : MonoBehaviour
 {
     public GameObject DDMGtext;
     public GameObject SPEEDtext;
-
+    public AudioSource audioeffect;
     public GameObject shielduptxt;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioeffect.Stop();
         DDMGtext.SetActive(false);
         SPEEDtext.SetActive(false); 
         shielduptxt.SetActive(false);
@@ -25,6 +26,7 @@ public class TextSpawner : MonoBehaviour
  
     public IEnumerator DDMGText()
     {
+        audioeffect.Play();
         DDMGtext.SetActive(true);
         yield return new WaitForSeconds(2);
 
@@ -36,6 +38,7 @@ public class TextSpawner : MonoBehaviour
     public IEnumerator SPEEDText()
     {
         {
+            audioeffect.Play();
             SPEEDtext.SetActive(true);
             yield return new WaitForSeconds(2);
 
@@ -46,7 +49,8 @@ public class TextSpawner : MonoBehaviour
 
      public IEnumerator ShieldUpTxt()
      {
-         shielduptxt.SetActive(true);
+        audioeffect.Play();
+        shielduptxt.SetActive(true);
         yield return new WaitForSeconds(2);
 
          shielduptxt.SetActive(false);

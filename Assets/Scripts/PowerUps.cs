@@ -13,14 +13,14 @@ public class PowerUps : MonoBehaviour
      SpriteRenderer sr;
     public bool poweruphit;
     public bool healthsys;
-
+ 
     float number;
     float cooldown = 5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        
         sbm = GameObject.FindGameObjectWithTag("Ball").GetComponent<SpeedBonusManagement>();
         TextSpawn = GameObject.FindGameObjectWithTag("TextSpawn").GetComponent<TextSpawner>();
         poweruphit = false;
@@ -58,7 +58,7 @@ public class PowerUps : MonoBehaviour
             {
                 Debug.Log("Player contact the power up");
 
-
+               
                 if (number == 0)
                 {
                     TextSpawn.StartCoroutine(TextSpawn.DDMGText());

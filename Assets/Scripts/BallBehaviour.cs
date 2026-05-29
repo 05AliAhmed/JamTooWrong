@@ -121,6 +121,7 @@ public class BallBehaviour : MonoBehaviour
                 else
                 {
                     Debug.Log("Player 1 blocked with shield");
+                    FirstPlayer.DmgAudio();
                     FirstPlayer.isShield = false;
                 }
 
@@ -160,6 +161,7 @@ public class BallBehaviour : MonoBehaviour
                 else
                 {
                     Debug.Log("Shield blocked damage");
+                    SecondPlayer.DmgAudio();
                     SecondPlayer.isShield = false;
                 }
 
