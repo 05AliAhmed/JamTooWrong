@@ -8,6 +8,7 @@ public class PlayerMovements : MonoBehaviour
     public GameObject playerOne;
     public GameObject playerTwo;
     public float speed;
+    public bool canMove=true;
     void PlayerOneMovement()
     {
         
@@ -43,6 +44,7 @@ public class PlayerMovements : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!canMove) return;
         PlayerOneMovement();
         PlayerTwoMovement();
         if (playerTwo.transform.position.x < playerOne.transform.position.x)

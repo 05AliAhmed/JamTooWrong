@@ -16,7 +16,7 @@ public class BallBehaviour : MonoBehaviour
     public float BonusBallSpeed = 20.0f; //the speed of the ball during a speed bonus power up
 
     public int playerTurn;
-
+    public PlayerMovements movementScript;
     public PlayerBehaviour FirstPlayer; //the variable for accessing player 1
     public PlayerBehaviour SecondPlayer; //and this is for player 2
 
@@ -364,6 +364,7 @@ public class BallBehaviour : MonoBehaviour
     {
         if (FirstPlayer.playerHealth <= 0)
         {
+            movementScript.canMove = false;
             BallSpeed = 0;
             FirstPlayer.playerAnim.SetBool("isDead", true);
 
@@ -374,6 +375,7 @@ public class BallBehaviour : MonoBehaviour
 
         if (SecondPlayer.playerHealth <= 0)
         {
+            movementScript.canMove = false;
             BallSpeed = 0;
             SecondPlayer.playerAnim.SetBool("isDead", true);
 
