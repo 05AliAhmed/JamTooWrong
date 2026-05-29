@@ -15,14 +15,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay.unity
     guid: 3f28782cee9303a4f998c336e2ed1950
   - enabled: 1
-    path: Assets/Scenes/Player1WinScreen.unity
-    guid: 6e04e4657e51dd142b491f9889bb8b26
+    path: Assets/Scenes/TutorialScene.unity
+    guid: 99b60d80af48c504b820162ca0245870
   - enabled: 1
     path: Assets/Scenes/LoadingScreen.unity
     guid: 6234bc7b1fb9ade448f13bf879a99304
   - enabled: 1
-    path: Assets/Scenes/TutorialScene.unity
-    guid: 99b60d80af48c504b820162ca0245870
+    path: Assets/Scenes/Player1WinScreen.unity
+    guid: 6e04e4657e51dd142b491f9889bb8b26
+  - enabled: 1
+    path: Assets/Scenes/P2WinScreen.unity
+    guid: fe6032899f0fbc844b955ea46b09f4e1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

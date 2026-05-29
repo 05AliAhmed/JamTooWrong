@@ -12,12 +12,13 @@ public class PlayerBehaviour : MonoBehaviour
     public bool playerTurn;
    //public int playerHealth = 3;
     public bool isDead;
+    public bool isFirstDead;
+    public bool isSecondDead;
+
+
     public bool DDMGeffect;
     public int MaxHealth = 3;
     public int playerHealth;
-
-    // public GameObject player1;
-    // public GameObject player2;
 
     public AudioSource dmgAudio;
     public AudioSource missedAudio;
@@ -25,8 +26,6 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioSource swipeAudio;
 
     public Animator playerAnim;
-
-    public float deathAnimationtime;
     //public BallBehaviour ball;
     // public GameObject missedText;
 
@@ -38,36 +37,34 @@ public class PlayerBehaviour : MonoBehaviour
         missedAudio.Stop();
         hitAudio.Stop();
         swipeAudio.Stop();
-        isDead = false;
+        //isDead = false;
+        isFirstDead = false;
+        isSecondDead = false;
         DDMGeffect = false;
-        playerHealth = MaxHealth;
+         playerHealth = MaxHealth;
 }
 
     // Update is called once per frame
     void Update()
     {
        
-        if (!isDead&&playerHealth<=0)
+        /*if (!isDead&&playerHealth<=0)
             
         {
             isDead = true;
             playerAnim.SetBool("isDead", true);
-            StartCoroutine(playerDestroy());
-            // gameObject.SetActive(false);
-            // Destroy(player1);
             Debug.Log("Game Over");
-            Debug.Log("first me");
-            //SceneManager.LoadScene(0);
-        }
-    }
 
-    public IEnumerator playerDestroy()
-    {
-        Debug.Log("second me");
-        yield return new WaitForSeconds(deathAnimationtime);
-        Debug.Log("third me");
-        gameObject.SetActive(false);
-        // Destroy(gameObject);
+            if (isFirstDead)
+            {
+                SceneManager.LoadScene(4);
+            }
+            if (isSecondDead)
+            {
+                SceneManager.LoadScene(5);
+            }
+            //SceneManager.LoadScene(0);
+        }*/
     }
 
 

@@ -5,6 +5,10 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public AudioSource MainMenuaudio;
+    public AudioSource GameplayAudio;
+
     void Awake()
     {
         if (instance == null)
@@ -15,23 +19,47 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        MainMenuaudio.Play();
+        GameplayAudio.Stop();
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Gameplay Scene
+        if (scene.buildIndex == 1)
+        {
+            MainMenuaudio.Stop();
+
+            if (!GameplayAudio.isPlaying)
+            {
+                GameplayAudio.Play();
+            }
+        }
+        else
+        {
+            GameplayAudio.Stop();
+
+            if (!MainMenuaudio.isPlaying)
+            {
+                MainMenuaudio.Play();
+            }
+        }
+    }
+
     public IEnumerator LoadScene(int _sceneindex)
     {
         Time.timeScale = 1f;
+
         SceneManager.LoadScene(3);
+
         yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene(_sceneindex);
