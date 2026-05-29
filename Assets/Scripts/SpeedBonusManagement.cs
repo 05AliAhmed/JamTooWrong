@@ -48,6 +48,15 @@ public class SpeedBonusManagement : MonoBehaviour
 
     IEnumerator SpeedBonusCountdown()
     {
+        if (ballBehaviourScript.BallSpeed >= 10.0f)
+        {
+            ballBehaviourScript.BonusBallSpeed = ballBehaviourScript.BallSpeed * 1.50f;
+        }
+        else 
+        {
+            ballBehaviourScript.BonusBallSpeed = ballBehaviourScript.BallSpeed * 1.25f;
+        }
+        
         coroutineStep = 2; //set the coroutine step/state to 2, so the game knows to stop the coroutine from starting again
 
         yield return new WaitForSeconds(1);

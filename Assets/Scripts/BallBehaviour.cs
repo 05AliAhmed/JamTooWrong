@@ -13,7 +13,7 @@ public class BallBehaviour : MonoBehaviour
 
     public float BallSpeed = 5f; //the base/original speed of the ball
     public float BallSpeedLimit = 15.0f; //the limit for the ball's speed
-    public float BonusBallSpeed = 20.0f; //the speed of the ball during a speed bonus power up
+    public float BonusBallSpeed; //the speed of the ball during a speed bonus power up
 
     public int playerTurn;
     public PlayerMovements movementScript;
