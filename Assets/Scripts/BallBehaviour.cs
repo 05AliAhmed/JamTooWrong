@@ -233,7 +233,7 @@ public class BallBehaviour : MonoBehaviour
         }
 
        
-        if (Input.GetMouseButtonDown(0) && isInput == true && playerTurn == 1)
+        if (Input.GetKeyDown(KeyCode.F) && isInput == true && playerTurn == 1)
         {
             player1animator.SetBool("isHitting", true);
 
@@ -286,12 +286,12 @@ public class BallBehaviour : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyCode.F))
         {
             player1animator.SetBool("isHitting", false);
         }
         // Player 2 turn
-         if (Input.GetMouseButtonDown(1) && isInput == true && playerTurn == 2)
+         if (Input.GetKeyDown(KeyCode.RightControl) && isInput == true && playerTurn == 2)
         {
             player2animator.SetBool("isHitting", true);
             if (SecondPlayer.parryPermission)
@@ -338,7 +338,7 @@ public class BallBehaviour : MonoBehaviour
                 SecondPlayer.PrintingTextTL(missedText);
             }
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyUp(KeyCode.RightControl))
         {
             player2animator.SetBool("isHitting", false);
         }
