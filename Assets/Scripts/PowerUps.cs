@@ -10,6 +10,7 @@ public class PowerUps : MonoBehaviour
     public List<GameObject> groupOfPlayers;
     public SpriteRenderer sr;
     public bool poweruphit;
+    public bool healthsys = false;
 
     float cooldown = 5f;
 
@@ -50,6 +51,8 @@ public class PowerUps : MonoBehaviour
                 collisioninfo.GetComponent<PlayerBehaviour>().DDMGeffect = true;
 
                 poweruphit = true;
+                // shieldup = true;
+                // ShieldUp();
                 
                 Destroy(gameObject);
             }
@@ -87,5 +90,11 @@ public class PowerUps : MonoBehaviour
 
         Destroy(gameObject); 
 
+    }
+
+    public void ShieldUp()
+    {
+        //show shield sprite
+        healthsys = true;
     }
 }

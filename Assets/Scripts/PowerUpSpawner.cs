@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUpSpawner : MonoBehaviour
 {
     public GameObject powerups;
+    public GameObject shieldup;
     //public SpriteRenderer sr;
     public float cooldown =8f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,6 +43,7 @@ public class PowerUpSpawner : MonoBehaviour
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
 
         Instantiate(powerups, worldPos, Quaternion.identity);
+        // Instantiate(shieldup, worldPos, Quaternion.identity);
     }
 
 

@@ -18,4 +18,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene( _sceneindex );
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("quit is working");
+    }
 }
