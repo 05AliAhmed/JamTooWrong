@@ -2229,6 +2229,8 @@ MonoBehaviour:
   parryPermission: 0
   playerTurn: 0
   isDead: 0
+  isFirstDead: 0
+  isSecondDead: 0
   DDMGeffect: 0
   MaxHealth: 3
   playerHealth: 3
@@ -2961,6 +2963,8 @@ MonoBehaviour:
   parryPermission: 0
   playerTurn: 0
   isDead: 0
+  isFirstDead: 0
+  isSecondDead: 0
   DDMGeffect: 0
   MaxHealth: 3
   playerHealth: 3
@@ -3832,6 +3836,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 44886766}
     - target: {fileID: 665987754533009275, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 158075073}
+    - target: {fileID: 665987754533009275, guid: f8f8be8491fa30440bda5d73b4ae3c38, type: 3}
       propertyPath: BallSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -4064,8 +4072,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294901248
+  m_fontColor: {r: 0, g: 0.99607843, b: 0.99607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4410,8 +4418,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289592832
+  m_fontColor: {r: 0, g: 0.99607843, b: 0.6784314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

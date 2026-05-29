@@ -12,6 +12,10 @@ public class PlayerBehaviour : MonoBehaviour
     public bool playerTurn;
    //public int playerHealth = 3;
     public bool isDead;
+    public bool isFirstDead;
+    public bool isSecondDead;
+
+
     public bool DDMGeffect;
     public int MaxHealth = 3;
     public int playerHealth;
@@ -33,7 +37,9 @@ public class PlayerBehaviour : MonoBehaviour
         missedAudio.Stop();
         hitAudio.Stop();
         swipeAudio.Stop();
-        isDead = false;
+        //isDead = false;
+        isFirstDead = false;
+        isSecondDead = false;
         DDMGeffect = false;
          playerHealth = MaxHealth;
 }
@@ -42,14 +48,23 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
        
-        if (!isDead&&playerHealth<=0)
+        /*if (!isDead&&playerHealth<=0)
             
         {
             isDead = true;
             playerAnim.SetBool("isDead", true);
             Debug.Log("Game Over");
+
+            if (isFirstDead)
+            {
+                SceneManager.LoadScene(4);
+            }
+            if (isSecondDead)
+            {
+                SceneManager.LoadScene(5);
+            }
             //SceneManager.LoadScene(0);
-        }
+        }*/
     }
 
 

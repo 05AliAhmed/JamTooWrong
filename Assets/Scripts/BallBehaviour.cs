@@ -1,9 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEngine.GraphicsBuffer;
 
 public class BallBehaviour : MonoBehaviour
 {
+    public Camera mainCam;
+
+
     public Transform PlayerOne; //this is the player 1 game object that the ball will follow
     public Transform PlayerTwo; //and this is the player 2 object.
 
@@ -94,8 +98,8 @@ public class BallBehaviour : MonoBehaviour
                     FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 2;
                     StartCoroutine(HitFlash(FirstPlayer.playerSprite));
-                    
-                    //CheckHealth();
+
+                    StartCoroutine(CheckHealth());
                 }
                 else
                 {
@@ -109,7 +113,7 @@ public class BallBehaviour : MonoBehaviour
                     FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 1;
                     StartCoroutine(HitFlash(FirstPlayer.playerSprite));
-                    //CheckHealth();
+                    StartCoroutine(CheckHealth());
                 }
             }
 
@@ -125,7 +129,7 @@ public class BallBehaviour : MonoBehaviour
                     SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 2;
                     StartCoroutine(HitFlash(SecondPlayer.playerSprite));
-                    // CheckHealth();
+                    StartCoroutine(CheckHealth());
                 }
                 else
                 {
@@ -139,7 +143,7 @@ public class BallBehaviour : MonoBehaviour
                     SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 1;
                     StartCoroutine(HitFlash(SecondPlayer.playerSprite));
-                    //CheckHealth();
+                    StartCoroutine(CheckHealth());
                 }
 
             }
@@ -160,15 +164,17 @@ public class BallBehaviour : MonoBehaviour
     }
     /*public void CheckHealth()
     {
-        if (FirstPlayer.playerHealth <=0)
+        if (FirstPlayer.playerHealth <= 0)
         {
-            FirstPlayer.isDead = true;
-        }
-        if(SecondPlayer.playerHealth <= 0)
-        {
-            SecondPlayer.isDead = true;
+            FirstPlayer.playerAnim.SetBool("isDead", true);
+            SceneManager.LoadScene(5);
         }
 
+        if (SecondPlayer.playerHealth <= 0)
+        {
+            SecondPlayer.playerAnim.SetBool("isDead", true);
+            SceneManager.LoadScene(4);
+        }
 
     }*/
     // Update is called once per frame
@@ -350,5 +356,62 @@ public class BallBehaviour : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+
+
+    public IEnumerator CheckHealth()
+    {
+        if (FirstPlayer.playerHealth <= 0)
+        {
+            BallSpeed = 0;
+            FirstPlayer.playerAnim.SetBool("isDead", true);
+
+            yield return StartCoroutine(DeathCameraFocus(FirstPlayer.transform));
+
+            SceneManager.LoadScene(5);
+        }
+
+        if (SecondPlayer.playerHealth <= 0)
+        {
+            BallSpeed = 0;
+            SecondPlayer.playerAnim.SetBool("isDead", true);
+
+            yield return StartCoroutine(DeathCameraFocus(SecondPlayer.transform));
+
+            SceneManager.LoadScene(4);
+        }
+    }
+
+    IEnumerator DeathCameraFocus(Transform target)
+    {
+        Vector3 startPos = mainCam.transform.position;
+
+        Vector3 targetPos = new Vector3(
+            target.position.x,
+            target.position.y,
+            startPos.z
+        );
+
+        float startSize = mainCam.orthographicSize;
+        float targetSize = 3f;
+
+        float duration = 2f;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+
+            mainCam.transform.position =
+                Vector3.Lerp(startPos, targetPos, time / duration);
+
+            mainCam.orthographicSize =
+                Mathf.Lerp(startSize, targetSize, time / duration);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
     }
 }
