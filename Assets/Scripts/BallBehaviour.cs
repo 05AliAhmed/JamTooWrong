@@ -88,64 +88,84 @@ public class BallBehaviour : MonoBehaviour
         {
             if (playerTurn == 1)
             {
-                if (P2ballonDDMG)
+                if (!FirstPlayer.isShield)
                 {
-                    HBS.P1DoubleLoseHealth();
-                    playerTurn = 2;
+                    if (P2ballonDDMG)
+                    {
+                        HBS.P1DoubleLoseHealth();
 
-                    BallSpeed = 1f; // changed from 5 to 1
-                    animSpeed.speed = 1f;
-                    FirstPlayer.DmgAudio();
-                    FirstPlayer.playerHealth -= 2;
-                    StartCoroutine(HitFlash(FirstPlayer.playerSprite));
+                        BallSpeed = 5f;
+                        animSpeed.speed = 1f;
 
-                    StartCoroutine(CheckHealth());
+                        FirstPlayer.DmgAudio();
+                        FirstPlayer.playerHealth -= 2;
+
+                        StartCoroutine(HitFlash(FirstPlayer.playerSprite));
+                        StartCoroutine(CheckHealth());
+                    }
+                    else
+                    {
+                        Debug.Log("Player 1 got hit");
+
+                        HBS.P1LoseHealth();
+
+                        BallSpeed = 5f;
+                        animSpeed.speed = 1f;
+
+                        FirstPlayer.DmgAudio();
+                        FirstPlayer.playerHealth -= 1;
+
+                        StartCoroutine(HitFlash(FirstPlayer.playerSprite));
+                        StartCoroutine(CheckHealth());
+                    }
                 }
                 else
                 {
-                    Debug.Log("Player 1 got hit");
-                    HBS.P1LoseHealth();
-                    //FirstPlayer.isHit = true;
-                    playerTurn = 2;
-
-                    BallSpeed = 1f; // changed from 5 to 1
-                    animSpeed.speed = 1f;
-                    FirstPlayer.DmgAudio();
-                    FirstPlayer.playerHealth -= 1;
-                    StartCoroutine(HitFlash(FirstPlayer.playerSprite));
-                    StartCoroutine(CheckHealth());
+                    Debug.Log("Player 1 blocked with shield");
+                    FirstPlayer.isShield = false;
                 }
+
+                // Always switch target/turn
+                playerTurn = 2;
             }
 
             else if (playerTurn == 2)
             {
-                if (P1ballonDDMG)
+                if (!SecondPlayer.isShield)
                 {
-                    HBS.P2DoubleLoseHealth();
-                    playerTurn = 1;
+                    if (P1ballonDDMG)
+                    {
+                        HBS.P2DoubleLoseHealth();
+                        BallSpeed = 5f;
+                        animSpeed.speed = 1f;
+                        SecondPlayer.DmgAudio();
+                        SecondPlayer.playerHealth -= 2;
+                        StartCoroutine(HitFlash(SecondPlayer.playerSprite));
+                        StartCoroutine(CheckHealth());
+                    }
+                    else
+                    {
+                        Debug.Log("Player 2 got hit");
 
-                    BallSpeed = 5f;
-                    animSpeed.speed = 1f;
-                    SecondPlayer.DmgAudio();
-                    SecondPlayer.playerHealth -= 2;
-                    StartCoroutine(HitFlash(SecondPlayer.playerSprite));
-                    StartCoroutine(CheckHealth());
+                        HBS.P2LoseHealth();
+                        BallSpeed = 5f;
+                        animSpeed.speed = 1f;
+                        SecondPlayer.DmgAudio();
+                        SecondPlayer.playerHealth -= 1;
+                        StartCoroutine(HitFlash(SecondPlayer.playerSprite));
+                        StartCoroutine(CheckHealth());
+                    }
+
+                  
                 }
                 else
                 {
-                    Debug.Log("Player 2 got hit");
-                    HBS.P2LoseHealth();
-                    //SecondPlayer.isHit = true;
-                    playerTurn = 1;
-
-                    BallSpeed = 5f;
-                    animSpeed.speed = 1f;
-                    SecondPlayer.DmgAudio();
-                    SecondPlayer.playerHealth -= 1;
-                    StartCoroutine(HitFlash(SecondPlayer.playerSprite));
-                    StartCoroutine(CheckHealth());
+                    Debug.Log("Shield blocked damage");
+                    SecondPlayer.isShield = false;
                 }
 
+                // Always switch target
+                playerTurn = 1;
             }
         }
     }

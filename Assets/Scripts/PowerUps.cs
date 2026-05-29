@@ -72,6 +72,12 @@ public class PowerUps : MonoBehaviour
                     Debug.Log("Speed boost");
                     sbm.isSpeedTrigger = true;
                 }
+                else if (number == 2)
+                {
+                    TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt());
+                    Debug.Log("ShieldUP");
+                    collisioninfo.GetComponent<PlayerBehaviour>().isShield = true;
+                }
                 // else if(number == 2)
                 // {
                 //     TextSpawn.StartCoroutine(TextSpawn.ShieldUpTxt());
@@ -121,7 +127,7 @@ public class PowerUps : MonoBehaviour
 
     public void randnum()
     {
-        number = Random.Range(0, 2);
+        number = Random.Range(0, 3);
         Debug.Log(number);
     }
 

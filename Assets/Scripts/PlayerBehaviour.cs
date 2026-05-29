@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public GameObject Shield;
     public SpriteRenderer playerSprite;
     //public float PlayerSpeed = 7f;
     public bool parryPermission; //used by the ball to decide which player can parry
@@ -14,7 +15,7 @@ public class PlayerBehaviour : MonoBehaviour
     public bool isDead;
     public bool isFirstDead;
     public bool isSecondDead;
-
+    public bool isShield = false;
 
     public bool DDMGeffect;
     public int MaxHealth = 3;
@@ -33,6 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Shield.SetActive(false);
         dmgAudio.Stop();
         missedAudio.Stop();
         hitAudio.Stop();
@@ -47,6 +49,14 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isShield)
+        {
+            Shield.SetActive(true);
+        }
+        else if (!isShield)
+        {
+            Shield.SetActive(false);
+        }
        
         /*if (!isDead&&playerHealth<=0)
             
