@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public SpriteRenderer playerSprite;
     //public float PlayerSpeed = 7f;
     public bool parryPermission; //used by the ball to decide which player can parry
     public bool playerTurn;
@@ -15,8 +16,10 @@ public class PlayerBehaviour : MonoBehaviour
     public int MaxHealth = 3;
     public int playerHealth;
 
-    public AudioSource hitaudio;
-
+    public AudioSource dmgAudio;
+    public AudioSource missedAudio;
+    public AudioSource hitAudio;
+    public AudioSource swipeAudio;
 
     //public BallBehaviour ball;
     // public GameObject missedText;
@@ -25,7 +28,10 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        hitaudio.Stop();
+        dmgAudio.Stop();
+        missedAudio.Stop();
+        hitAudio.Stop();
+        swipeAudio.Stop();
         isDead = false;
         DDMGeffect = false;
          playerHealth = MaxHealth;
@@ -80,8 +86,21 @@ public class PlayerBehaviour : MonoBehaviour
         StartCoroutine(PrintTextTR(text));
     }
 
+    public void DmgAudio()
+    {
+        dmgAudio.Play();
+    }
+
+    public void MissAudio()
+    {
+        missedAudio.Play();
+    }
     public void HitAudio()
     {
-        hitaudio.Play();
+        hitAudio.Play();
+    }
+    public void SwipeAudio()
+    {
+        swipeAudio.Play();
     }
 }

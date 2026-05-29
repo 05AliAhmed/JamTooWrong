@@ -7,6 +7,8 @@ TagManager:
   - Health
   - Heart
   - Parry
+  - Ball
+  - TextSpawn
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -8,6 +9,7 @@ public class BallBehaviour : MonoBehaviour
 
     public float BallSpeed = 5f; //the base/original speed of the ball
     public float BallSpeedLimit = 15.0f; //the limit for the ball's speed
+    public float BonusBallSpeed = 20.0f; //the speed of the ball during a speed bonus power up
 
     public int playerTurn;
 
@@ -20,12 +22,15 @@ public class BallBehaviour : MonoBehaviour
     public bool isInput;// diable whether the player can click the mouse again or not
     public bool P1ballonDDMG;// use to call when the ball is on double dmg or not
     public bool P2ballonDDMG;
+    public bool speedBonusStatus; //used to tell the ball whether the speed bonus is active or not
 
     public GameObject parryText;
     public GameObject missedText;
 
     public Animator animSpeed;
-   
+
+    public Animator player1animator;
+    public Animator player2animator;
     //public GameObject parryText;
    // public bool isInside;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -86,8 +91,9 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    FirstPlayer.HitAudio();
+                    FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 2;
+                    StartCoroutine(HitFlash(FirstPlayer.playerSprite));
                     
                     //CheckHealth();
                 }
@@ -100,9 +106,9 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    FirstPlayer.HitAudio();
+                    FirstPlayer.DmgAudio();
                     FirstPlayer.playerHealth -= 1;
-
+                    StartCoroutine(HitFlash(FirstPlayer.playerSprite));
                     //CheckHealth();
                 }
             }
@@ -116,9 +122,10 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    SecondPlayer.HitAudio();
+                    SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 2;
-                   // CheckHealth();
+                    StartCoroutine(HitFlash(SecondPlayer.playerSprite));
+                    // CheckHealth();
                 }
                 else
                 {
@@ -129,8 +136,9 @@ public class BallBehaviour : MonoBehaviour
 
                     BallSpeed = 5f;
                     animSpeed.speed = 1f;
-                    SecondPlayer.HitAudio();
+                    SecondPlayer.DmgAudio();
                     SecondPlayer.playerHealth -= 1;
+                    StartCoroutine(HitFlash(SecondPlayer.playerSprite));
                     //CheckHealth();
                 }
 
@@ -169,11 +177,22 @@ public class BallBehaviour : MonoBehaviour
         //if it's player 1's turn to play, the ball will move towards player 1
         if (playerTurn == 1)
         {
-            transform.position = Vector2.MoveTowards(
+            if (speedBonusStatus != true)
+            {
+                transform.position = Vector2.MoveTowards(
                 transform.position,
                 PlayerOne.position,
                 BallSpeed * Time.deltaTime
                 );
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(
+                transform.position,
+                PlayerOne.position,
+                BonusBallSpeed * Time.deltaTime
+                );
+            }
 
             Vector3 direction = PlayerOne.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -184,11 +203,22 @@ public class BallBehaviour : MonoBehaviour
         //if it's player 2's turn to play, the ball will move towards player 2
         if (playerTurn == 2)
         {
-            transform.position = Vector2.MoveTowards(
+            if (speedBonusStatus != true)
+            {
+                transform.position = Vector2.MoveTowards(
                 transform.position,
                 PlayerTwo.position,
                 BallSpeed * Time.deltaTime
                 );
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(
+                transform.position,
+                PlayerTwo.position,
+                BonusBallSpeed * Time.deltaTime
+                );
+            }
 
             Vector3 direction = PlayerTwo.position - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -196,43 +226,10 @@ public class BallBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 0f, angle + 90f);
         }
 
-        //if you press this button, you will attempt to parry
-        /*if (Input.GetMouseButtonDown(2)) //feel free to replace input with whatever you want
-         {
-             //if player one can parry, move the ball towards player two, and increase it's speed.
-             if (FirstPlayer.parryPermission == true)
-             {
-                 playerTurn++;
-                 if (BallSpeed < BallSpeedLimit) 
-                 { 
-                     BallSpeed++;
-                 }
-             }
-
-             //if player two can parry, move the ball towards player one, and increase it's speed.
-             if (SecondPlayer.parryPermission == true)
-             {
-                 playerTurn++;
-                 if (BallSpeed < BallSpeedLimit)
-                 {
-                     BallSpeed++;
-                 }
-             }
-             if (FirstPlayer.parryPermission==false )
-             {
-                 playerTurn++;
-                 Debug.Log("Misclick");
-             }
-             if (SecondPlayer.parryPermission==false)
-             {
-                 playerTurn++;
-                 Debug.Log("Misclick");
-             }
-         }
-        */
+       
         if (Input.GetMouseButtonDown(0) && isInput == true && playerTurn == 1)
         {
-
+            player1animator.SetBool("isHitting", true);
 
             if (FirstPlayer.parryPermission)
             {
@@ -253,7 +250,10 @@ public class BallBehaviour : MonoBehaviour
 
                 if (BallSpeed < BallSpeedLimit)
                 {
-                    BallSpeed++;
+                    if (speedBonusStatus != true)
+                    {
+                        BallSpeed++;
+                    }
                     animSpeed.speed++;
                 }
                 else if (BallSpeed >= BallSpeedLimit)
@@ -262,6 +262,8 @@ public class BallBehaviour : MonoBehaviour
                 }
 
                 Debug.Log("Player 1 Parried");
+                FirstPlayer.SwipeAudio();
+                FirstPlayer.HitAudio();
                 FirstPlayer.PrintingTextTR(parryText);
             }
             else
@@ -270,14 +272,22 @@ public class BallBehaviour : MonoBehaviour
                 Debug.Log("Player 1 Missed");
                 isInput = false;
                 FirstPlayer.DDMGeffect = false;
+                FirstPlayer.SwipeAudio();
+                FirstPlayer.MissAudio();
                 FirstPlayer.PrintingTextTR(missedText);
 
             }
 
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            player1animator.SetBool("isHitting", false);
+        }
         // Player 2 turn
          if (Input.GetMouseButtonDown(1) && isInput == true && playerTurn == 2)
         {
+            player2animator.SetBool("isHitting", true);
             if (SecondPlayer.parryPermission)
             {
 
@@ -295,8 +305,10 @@ public class BallBehaviour : MonoBehaviour
 
                 if (BallSpeed < BallSpeedLimit)
                 {
-                    BallSpeed++;
-
+                    if (speedBonusStatus != true)
+                    {
+                        BallSpeed++;
+                    }
                     animSpeed.speed++;
                 }
                 else if (BallSpeed >= BallSpeedLimit)
@@ -305,6 +317,8 @@ public class BallBehaviour : MonoBehaviour
                 }
 
                 Debug.Log("Player 2 Parried");
+                SecondPlayer.SwipeAudio();
+                SecondPlayer.HitAudio();
                 SecondPlayer.PrintingTextTL(parryText);
             }
             else
@@ -313,18 +327,28 @@ public class BallBehaviour : MonoBehaviour
                 Debug.Log("Player 2 Missed");
                 isInput = false;
                 SecondPlayer.DDMGeffect = false;
+                SecondPlayer.SwipeAudio();
+                SecondPlayer.MissAudio();
                 SecondPlayer.PrintingTextTL(missedText);
             }
         }
-        
-        
-
-
-        //this code makes sure player turns are cycled between player 1 and 2 by setting playerTurn back to 1 every time its more than 2,
-        //creating a loop that makes switching player turns as easy as "playerTurn++;".
-        if (playerTurn > 2)
+        if (Input.GetMouseButtonUp(1))
         {
-            playerTurn = 1;
+            player2animator.SetBool("isHitting", false);
+        }
+
+    }
+    public IEnumerator HitFlash(SpriteRenderer sr)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            sr.enabled = false;
+
+            yield return new WaitForSeconds(0.1f);
+
+            sr.enabled = true;
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
