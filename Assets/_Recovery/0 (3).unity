@@ -2233,7 +2233,6 @@ MonoBehaviour:
   missedAudio: {fileID: 975221876}
   hitAudio: {fileID: 975221875}
   swipeAudio: {fileID: 975221878}
-  playerAnim: {fileID: 975221877}
 --- !u!82 &975221874
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2247,7 +2246,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 22337854b893c3b428cebcb639f9a821, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2439,7 +2438,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e5b431b26e1295b438e59a09cff3014b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 98a3211ed7e3d5b4ab5d9073303d9611, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2965,7 +2964,6 @@ MonoBehaviour:
   missedAudio: {fileID: 1061214130}
   hitAudio: {fileID: 1061214129}
   swipeAudio: {fileID: 1061214132}
-  playerAnim: {fileID: 1061214131}
 --- !u!82 &1061214128
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2979,7 +2977,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 22337854b893c3b428cebcb639f9a821, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3171,7 +3169,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e5b431b26e1295b438e59a09cff3014b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 98a3211ed7e3d5b4ab5d9073303d9611, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

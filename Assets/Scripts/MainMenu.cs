@@ -18,4 +18,8 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene( _sceneindex );
     }
+    public void startchangeScene(int _sceneindex)
+    {
+        GameManager.instance.GMLoadScene(_sceneindex);
+    }
 }

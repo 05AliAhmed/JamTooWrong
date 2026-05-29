@@ -21,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     public AudioSource hitAudio;
     public AudioSource swipeAudio;
 
+    public Animator playerAnim;
     //public BallBehaviour ball;
     // public GameObject missedText;
 
@@ -45,6 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
             
         {
             isDead = true;
+            playerAnim.SetBool("isDead", true);
             Debug.Log("Game Over");
             //SceneManager.LoadScene(0);
         }
